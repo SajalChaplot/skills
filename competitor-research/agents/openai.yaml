@@ -1,0 +1,4 @@
+interface:
+  display_name: "Competitor Reasoning"
+  short_description: "Turn competitor evidence into product and UX decisions"
+  default_prompt: "Use $competitor-reasoning to investigate a focused competitor cohort and recommend product and design actions backed by evidence."
