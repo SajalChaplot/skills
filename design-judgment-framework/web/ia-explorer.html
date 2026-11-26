@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Design Judgment · IA Exploration Studio</title>
+<style>
+:root{--bg:#f5f7f6;--paper:#fff;--ink:#162021;--muted:#5b6a6e;--border:#dce4e2;--accent:#087a72;--accent-weak:#e4f3ef;--warning:#805a17;--warn-bg:#fff7e9;--shadow:0 4px 18px rgba(20,40,38,.035)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #49aaa5;outline-offset:3px}header{background:white;border-bottom:1px solid var(--border)}.wrap{max-width:1340px;margin:auto;padding:0 24px}.header{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;padding:25px 0}.eyebrow{text-transform:uppercase;font-weight:800;letter-spacing:.14em;font-size:10px;color:var(--accent)}h1{font-size:30px;letter-spacing:-.045em;margin:4px 0;line-height:1.14}h2{font-size:18px;letter-spacing:-.025em;margin:0 0 4px}h3{font-size:15px;margin:0 0 5px}.muted{color:var(--muted)}.small{font-size:12px}.tiny{font-size:11px}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}button,.linkbtn{border:1px solid #cdd9d6;border-radius:9px;background:white;padding:9px 12px;text-decoration:none;color:var(--ink);font-weight:650;display:inline-flex;align-items:center;justify-content:center}button.primary{background:#1d4442;border-color:#1d4442;color:white}button.ghost{background:transparent;border:0;color:var(--accent);padding:4px 6px;font-size:12px}main{display:grid;grid-template-columns:minmax(270px,.82fr) minmax(520px,1.4fr);align-items:start;gap:18px;padding-top:20px;padding-bottom:46px}.panel{background:var(--paper);border:1px solid var(--border);border-radius:13px;overflow:hidden;box-shadow:var(--shadow)}.pad{padding:19px}.line{border-bottom:1px solid var(--border)}.panel-head{padding:20px 20px 16px}.panel-head .muted{margin:0}.intro{font-size:13px;line-height:1.6}.profile{padding:10px 12px;border-radius:9px;background:#eef4f2;margin-top:13px;color:#37534e;font-size:11px}.axis{padding:11px 0;border-top:1px solid #eef1f0}.axis:first-child{border:0}.axheader{display:flex;justify-content:space-between;gap:8px;align-items:center}.axheader label{font-size:13px;font-weight:680}.axheader b{font-size:14px;font-variant-numeric:tabular-nums}.axis p{margin:3px 0 6px;font-size:11px;color:var(--muted)}.axis input{width:100%;accent-color:var(--accent)}.split{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{border:1px solid var(--border);border-radius:10px;padding:12px}.metric b{font-size:25px;display:block;line-height:1.2}.metric small{font-size:11px;color:var(--muted)}.tag{display:inline-flex;border-radius:99px;background:#e7f1ed;padding:3px 9px;color:#25685b;font-size:10px;font-weight:800;letter-spacing:.02em}.tag.warn{background:#fff0d7;color:#82581a}.section{padding:18px 20px;border-bottom:1px solid var(--border)}.section:last-child{border:0}.notice{border:1px solid #f0ddb5;background:#fffaf0;border-radius:9px;padding:12px 13px;font-size:12px;line-height:1.55;color:#6b501e}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.opt{background:white;border:1px solid var(--border);border-radius:10px;text-align:left;padding:13px;display:block;width:100%;transition:border-color .15s,background .15s}.opt.selected{border:2px solid var(--accent);padding:12px;background:#f8fdfb}.opt .title{font-weight:720;font-size:13px;display:flex;align-items:center;justify-content:space-between;gap:6px}.opt .number{font-size:23px;font-weight:770;letter-spacing:-.04em}.opt .number small{font-size:11px;color:var(--muted);letter-spacing:0}.opt .bar{height:5px;border-radius:10px;background:#e5ece9;margin:9px 0}.opt .bar>span{display:block;height:100%;background:#7fa9a1;border-radius:10px}.opt.selected .bar>span{background:var(--accent)}.opt .desc{font-size:11px;color:var(--muted);min-height:33px}.detail{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tree{white-space:pre-wrap;background:#f4f7f6;border:1px solid #e3eae8;border-radius:9px;padding:13px;font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto;min-height:140px}.list{margin:6px 0 0;padding-left:18px;font-size:12px;color:#3e5052}.list li{margin:4px 0}.walk{padding:9px 10px;border:1px solid var(--border);border-radius:8px;margin:7px 0}.walk b{font-size:12px}.walk p{font-size:12px;margin:4px 0 0;color:var(--muted)}.score-note{color:#55666a;background:#f1f5f3;border-radius:8px;font-size:11px;padding:9px 10px;margin-top:12px}.hint{font-size:12px;color:var(--muted);margin-top:10px}footer{padding:22px 0;border-top:1px solid var(--border);color:var(--muted);font-size:12px}a{color:#066c64}.stats{font-variant-numeric:tabular-nums}#weightStatus{min-height:16px;font-size:11px;color:#42645c;margin-top:6px}@media(max-width:1000px){main{grid-template-columns:1fr}.wrap{padding:0 15px}.options{grid-template-columns:1fr 1fr}}@media(max-width:600px){h1{font-size:26px}.options,.detail,.split{grid-template-columns:1fr}.header{padding:20px 0}.pad,.section{padding:15px}}
+</style>
+</head>
+<body>
+<header><div class="wrap header"><div><div class="eyebrow">Design Judgment / IA Exploration Studio · v1.1</div><h1>Explore the structure before the screens.</h1><p class="muted small">Compare information models, task paths and navigation decisions under different priorities.</p></div><div class="toolbar"><a href="index.html" class="linkbtn">Original V1 sliders</a><button id="weightsExport">Export weights</button><button class="primary" id="comparisonExport">Export comparison</button></div></div></header>
+<main class="wrap">
+<aside class="panel"><div class="panel-head line"><div class="eyebrow">01 · Task priorities</div><h2>What matters for this decision?</h2><p class="muted small">Relative weights for this security-alert exercise. They are not research findings or domain defaults.</p><div class="profile">Origin: task-specific priorities supplied during an earlier security-alert concept review.</div></div>
+<div class="pad"><div id="axisList"></div><button id="resetWeights" class="ghost">↺ Restore task priorities</button><p id="weightStatus" aria-live="polite"></p><div class="notice" style="margin-top:15px"><strong>Weights do not determine the right IA.</strong> They rank hypothetical fit estimates. Evidence about user mental models, task success, security constraints and reliability must be evaluated separately.</div></div></aside>
+<div class="panel"><div class="section"><div class="eyebrow">02 · Architecture exploration</div><h2>Security alert investigation</h2><p class="intro muted">Which organizing model helps a security analyst prioritize, investigate and remediate alerts, while supporting resource owners and responders?</p><div class="split" style="margin-top:15px"><div class="metric"><small>Top estimated preference fit</small><b id="topScore" class="stats">—</b><small id="topOption">—</small></div><div class="metric"><small>Evidence status</small><b style="font-size:19px;margin:3px 0">Unvalidated</b><small>No task tests or mental-model evidence included</small></div></div><div class="notice" style="margin-top:12px" id="caution">The displayed ranking is provisional.</div></div>
+<div class="section"><div class="row"><h3>Four organizational models</h3><span class="tag">Select to inspect</span></div><p class="muted small" style="margin:1px 0 12px">The comparison uses the same users and tasks. Scores are illustrative estimates, not measured performance.</p><div class="options" id="options" role="group" aria-label="Information architecture alternatives"></div></div>
+<div class="section"><div class="eyebrow">03 · Inspect selected model</div><h2 id="selectedHeading">—</h2><p class="muted small" id="selectedPrinciple"></p><div class="detail" style="margin-top:13px"><div><h3>Navigation structure</h3><div id="tree" class="tree"></div><h3 style="margin-top:12px">Cross-links and search</h3><ul id="links" class="list"></ul><p id="search" class="hint"></p></div><div><h3>Where it helps</h3><ul id="benefits" class="list"></ul><h3 style="margin-top:14px">Where it breaks down</h3><ul id="failures" class="list"></ul><div class="score-note" id="rationale"></div></div></div></div>
+<div class="section"><h3>Trace the same tasks through each IA</h3><p class="small muted">Navigation paths below are authored hypotheses. They are not timings or observations.</p><div id="walkthroughs"></div></div>
+<div class="section"><div class="eyebrow">04 · Recommendation and evidence gate</div><h3 id="recommendationTitle">—</h3><p class="intro muted" id="recommendationReason"></p><div class="notice" style="margin-top:13px"><strong>Before wireframes:</strong> Validate grouping, labels, task findability and deep-link workflows using task analysis, tree testing and low-fidelity task walkthroughs. Unknown authorization boundaries require review.</div><p class="hint">See <code>skills/design-information-architecture/SKILL.md</code> and <code>examples/security-alert-ia.json</code> in the downloadable package for the generic workflow and full artifact.</p></div>
+</div>
+</main>
+<footer><div class="wrap">Offline IA exploration · Case-specific rubric · Example data is illustrative and must not be cited as usability research. No network required.</div></footer>
+<script id="seed" type="application/json">{
+  "schema_version": "1.1",
+  "case_id": "security-alert-ia-exploration",
+  "title": "Information architecture exploration for security alerts",
+  "domain": "security",
+  "case_type": "reconstructed_illustrative_ia_exploration",
+  "status_note": "Reconstructed from an earlier design discussion. Only eight priority inputs and the four candidate structures are provided by that discussion. Trees, scenario paths and numerical fit scores below are authored examples; they are NOT measured user outcomes.",
+  "design_question": "Should alerts, workflows, resources or correlated incidents organize the primary security investigation experience?",
+  "scope_and_context": {
+    "primary_job": "Prioritize urgent alerts, investigate evidence, and take controlled remediation action",
+    "primary_beneficiary": "Security analyst handling triage and investigation",
+    "secondary_users": [
+      "Security response lead",
+      "Platform/service owner"
+    ],
+    "evidence_status": "user task and personas inferred from the assignment context; needs observation",
+    "assumptions": [
+      "Analysts frequently enter via an alerts queue",
+      "Analysts need non-linear pivots between alert and resource evidence",
+      "Reliability of incident correlation is unknown"
+    ],
+    "hard_constraints": [
+      "Authorization and auditability for remediation actions",
+      "Critical alerts must remain accessible",
+      "Applicable privacy, security and accessibility requirements"
+    ]
+  },
+  "information_model": {
+    "entities": [
+      "Alert",
+      "Event / evidence",
+      "Asset / service",
+      "Incident (optional grouping)",
+      "User / owner",
+      "Remediation action"
+    ],
+    "relationships": [
+      "Alert references one or more evidence items",
+      "Alert can affect one or more assets",
+      "Incident groups zero or more alerts when correlation is supported",
+      "Alert and incident can have owners and state transitions",
+      "Remediation actions must be authorized and auditable"
+    ],
+    "unknowns": [
+      "Cardinality in underlying product",
+      "Correlation reliability and editing rules",
+      "Real user terminology and information hierarchy"
+    ]
+  },
+  "task_scenarios": [
+    {
+      "id": "triage",
+      "persona": "Security analyst",
+      "entry": "Alerts list/queue",
+      "goal": "Identify the most urgent unresolved alert and its likely blast radius",
+      "edge_case": "High-volume alerts with duplicate signals"
+    },
+    {
+      "id": "investigate",
+      "persona": "Security analyst",
+      "entry": "Notification / bookmarked deep link",
+      "goal": "Inspect alert evidence and pivot to related assets or events",
+      "edge_case": "Missing enrichment and partial data"
+    },
+    {
+      "id": "remediate",
+      "persona": "Security analyst or responder",
+      "entry": "Active investigation",
+      "goal": "Assign ownership, record decision and initiate remediation",
+      "edge_case": "Responder lacks permission for a destructive action"
+    },
+    {
+      "id": "asset",
+      "persona": "Platform or infrastructure owner",
+      "entry": "Specific asset or service",
+      "goal": "Find all alerts affecting that resource",
+      "edge_case": "Resource participates in multiple incidents"
+    }
+  ],
+  "rubric": {
+    "weight_origin": "User-supplied task priority overrides from prior security-alert concept review; not research defaults",
+    "scoring_scale": "0–5 estimated option fit; not measured",
+    "axes": {
+      "efficiency": {
+        "label": "Efficiency",
+        "definition": "How directly a user reaches high-priority tasks across entry points",
+        "rubric_0": "Unnecessary detours and context loss",
+        "rubric_5": "Direct access with context continuity"
+      },
+      "information_density": {
+        "label": "Information density",
+        "definition": "Useful decision context available without overwhelming the user",
+        "rubric_0": "Important context scattered or buried",
+        "rubric_5": "Critical context simultaneously accessible and distinguishable"
+      },
+      "discoverability": {
+        "label": "Discoverability",
+        "definition": "How well the hierarchy and labels expose where functions live",
+        "rubric_0": "Important functions hard to locate",
+        "rubric_5": "Clear, predictable paths for intended users"
+      },
+      "user_control": {
+        "label": "User control",
+        "definition": "Nonlinear navigation, filtering, exploration and recovery freedom",
+        "rubric_0": "Rigid sequence and limited navigation",
+        "rubric_5": "Strong user-directed investigation and traversal"
+      },
+      "guidance": {
+        "label": "Guidance",
+        "definition": "Support for knowing the next appropriate action during the task",
+        "rubric_0": "No visible next steps",
+        "rubric_5": "Clear, contextual guidance without excessive restriction"
+      },
+      "flexibility": {
+        "label": "Flexibility",
+        "definition": "Ability to support alternate jobs and future pivots in the task",
+        "rubric_0": "Single narrow task flow",
+        "rubric_5": "Multiple efficient paths with predictable structure"
+      },
+      "consistency": {
+        "label": "Consistency",
+        "definition": "Stable recognizable entities, labels and navigation patterns",
+        "rubric_0": "Disjointed and unpredictable structure",
+        "rubric_5": "Coherent recognizable organization"
+      },
+      "simplicity": {
+        "label": "Simplicity",
+        "definition": "Ease of understanding the organizational model, not raw screen sparseness",
+        "rubric_0": "Unclear grouping and high translation burden",
+        "rubric_5": "Comprehensible groups and predictable mental map"
+      }
+    },
+    "weights": {
+      "efficiency": 90,
+      "information_density": 80,
+      "discoverability": 55,
+      "user_control": 95,
+      "guidance": 70,
+      "flexibility": 70,
+      "consistency": 85,
+      "simplicity": 80
+    }
+  },
+  "alternatives": [
+    {
+      "id": "alert-centered",
+      "name": "Alert-centered / object-oriented",
+      "organizing_principle": "Individual alert is canonical entry object; actions and related context hang off the alert",
+      "default_entry": "Alerts / prioritized queue",
+      "navigation_tree": [
+        "Alerts",
+        "  ├─ Active alerts",
+        "  ├─ Assigned to me",
+        "  └─ Alert detail → Evidence / Timeline / Remediation",
+        "Assets → Asset detail → Related alerts",
+        "Investigations → Saved investigations"
+      ],
+      "cross_links": [
+        "Alert → asset",
+        "Alert → related alerts",
+        "Alert → incident (if grouping exists)",
+        "Alert → remediation record"
+      ],
+      "search_and_filters": "Global alert search, severity/status/owner filters, asset drill-in",
+      "task_walkthroughs": {
+        "triage": "Queue → sort/filter → open alert → decide",
+        "investigate": "Open alert deep link → inspect evidence → pivot to asset or linked alerts",
+        "remediate": "Alert detail → ownership and remediation panel → status",
+        "asset": "Asset detail → related alerts → alert detail"
+      },
+      "benefits": [
+        "Strong fast triage and granular control",
+        "Preserves separate alert details and investigation pivots",
+        "Works even without reliable correlation"
+      ],
+      "failure_modes": [
+        "Can fragment a single incident into many alerts",
+        "Analyst may manually synthesize context across related signals",
+        "First-time responders may lack workflow guidance"
+      ],
+      "fit_scores": {
+        "efficiency": 4.6,
+        "information_density": 4.6,
+        "discoverability": 4.0,
+        "user_control": 4.9,
+        "guidance": 3.4,
+        "flexibility": 4.8,
+        "consistency": 4.4,
+        "simplicity": 4.1
+      },
+      "fit_rationale": "Hypothesis: a frequently used alert queue and detail object support high-volume triage and flexible pivots; guidance and correlation remain weaker.",
+      "known_hard_constraint_violations": [],
+      "unknown_constraints": [
+        "Data-level authorization for linked assets must be specified"
+      ]
+    },
+    {
+      "id": "workflow-centered",
+      "name": "Workflow / task-oriented",
+      "organizing_principle": "Users progress across explicit triage, investigation, remediation, and resolution stages",
+      "default_entry": "Triage stage / assigned work",
+      "navigation_tree": [
+        "Triage → Prioritize and assign",
+        "Investigate → Evidence and relationships",
+        "Remediate → Action plan and handoff",
+        "Resolve → Verification and closure"
+      ],
+      "cross_links": [
+        "Stage → alert",
+        "Investigation → related assets",
+        "Remediation → owner/incident"
+      ],
+      "search_and_filters": "Stage-specific queues and task search with cross-stage history",
+      "task_walkthroughs": {
+        "triage": "Triage → select candidate → investigate stage",
+        "investigate": "Direct link → determine stage → navigate investigation context",
+        "remediate": "Investigate → Remediate stage → review and assign",
+        "asset": "Asset search → choose stage-specific related alerts"
+      },
+      "benefits": [
+        "Strong explicit next-step guidance",
+        "Clear operational responsibilities and handoffs",
+        "May help unfamiliar analysts follow a standard process"
+      ],
+      "failure_modes": [
+        "Rigid stages hinder non-linear expert investigations",
+        "Same alert may appear in several stage contexts",
+        "Deep links may create ambiguous landing states"
+      ],
+      "fit_scores": {
+        "efficiency": 3.8,
+        "information_density": 3.4,
+        "discoverability": 4.3,
+        "user_control": 3.1,
+        "guidance": 5.0,
+        "flexibility": 3.0,
+        "consistency": 4.0,
+        "simplicity": 3.7
+      },
+      "fit_rationale": "Hypothesis: stage grouping teaches process but adds navigation for analysts who need to pivot unpredictably.",
+      "known_hard_constraint_violations": [],
+      "unknown_constraints": [
+        "Workflow stage boundaries and escalation rules need validation"
+      ]
+    },
+    {
+      "id": "resource-centered",
+      "name": "Resource / asset-oriented",
+      "organizing_principle": "Servers, cloud services and applications are the top-level information objects",
+      "default_entry": "Assets / service inventory",
+      "navigation_tree": [
+        "Assets",
+        "  ├─ Service / application",
+        "  │   ├─ Health and configuration",
+        "  │   └─ Alerts and incidents",
+        "  └─ Infrastructure resource",
+        "Owners / teams"
+      ],
+      "cross_links": [
+        "Asset → active alerts",
+        "Asset → related services",
+        "Asset → owners"
+      ],
+      "search_and_filters": "Service ownership, environment and resource property filters",
+      "task_walkthroughs": {
+        "triage": "Assets → locate problem resource → alerts",
+        "investigate": "Deep-linked alert → identify asset → resource timeline",
+        "remediate": "Resource → locate alert → owner and action",
+        "asset": "Asset → related alerts"
+      },
+      "benefits": [
+        "Natural for platform owners starting from a known service",
+        "Persistent system and ownership context",
+        "Supports resource-centric troubleshooting"
+      ],
+      "failure_modes": [
+        "Scattered severity prioritization across assets",
+        "Organization-wide alert queue harder to access",
+        "Cross-resource incident may be fragmented"
+      ],
+      "fit_scores": {
+        "efficiency": 3.1,
+        "information_density": 4.3,
+        "discoverability": 3.2,
+        "user_control": 4.5,
+        "guidance": 2.9,
+        "flexibility": 3.8,
+        "consistency": 4.0,
+        "simplicity": 3.3
+      },
+      "fit_rationale": "Hypothesis: effective for asset-centered users, worse when triage starts from an organization-wide alert priority.",
+      "known_hard_constraint_violations": [],
+      "unknown_constraints": [
+        "Resource inventory coverage and owner mappings unknown"
+      ]
+    },
+    {
+      "id": "incident-centered",
+      "name": "Incident / correlation-oriented",
+      "organizing_principle": "Group related security signals into an incident-level investigation entity",
+      "default_entry": "Active incidents / correlated signal groups",
+      "navigation_tree": [
+        "Incidents",
+        "  ├─ Active incidents",
+        "  ├─ Investigations",
+        "  └─ Incident detail → Signals / Assets / Timeline / Response",
+        "Unassigned signals → Raw alerts"
+      ],
+      "cross_links": [
+        "Incident → alerts",
+        "Incident → impacted assets",
+        "Incident → remediation and owners"
+      ],
+      "search_and_filters": "Incident status, severity, related alerts, blast radius and owner filters",
+      "task_walkthroughs": {
+        "triage": "Incident queue → open correlated group → decide",
+        "investigate": "Alert deep link → incident → signals, evidence and assets",
+        "remediate": "Incident → response owner → remediation",
+        "asset": "Asset → linked incidents → underlying alerts"
+      },
+      "benefits": [
+        "Groups noise into actionable cases when correlation is reliable",
+        "Presents related evidence and responders together",
+        "Supports multi-alert investigations"
+      ],
+      "failure_modes": [
+        "Incorrect correlation obscures critical standalone alerts",
+        "Users may distrust grouping and need raw-alert escape",
+        "Dependent on correlation quality and editorial rules"
+      ],
+      "fit_scores": {
+        "efficiency": 4.2,
+        "information_density": 4.5,
+        "discoverability": 3.8,
+        "user_control": 3.7,
+        "guidance": 4.4,
+        "flexibility": 4.0,
+        "consistency": 3.9,
+        "simplicity": 3.9
+      },
+      "fit_rationale": "Hypothesis: strong when signals reliably group; limited without validated correlation and an accessible raw-alert view.",
+      "known_hard_constraint_violations": [],
+      "unknown_constraints": [
+        "No evidence of signal correlation accuracy; must not suppress independent critical alerts"
+      ]
+    }
+  ],
+  "provisional_recommendation": {
+    "primary_architecture": "alert-centered",
+    "overlay": "Workflow cues for next actions, resource-based filtering/cross-links, contextual AI assistance (not a top-level IA destination)",
+    "reason": "High task weights on control, efficiency and information density provisionally favor an alert-level canonical object with flexible pivots. This is a hypothesis, not proof.",
+    "conditions_for_reversal": [
+      "If reliable correlation demonstrably improves task success, test incident-first IA",
+      "If dominant jobs begin from a known asset, resource-first may win",
+      "If novice guided response is the priority, workflow-first may win"
+    ],
+    "who_may_lose": [
+      "Novice analysts who need process guidance",
+      "Incident responders dealing with many related alerts"
+    ]
+  },
+  "known_evidence_gaps": [
+    "No observed security analyst mental models or tree-test results",
+    "No directly measured time-to-triage, findability or remediation success",
+    "Option fit estimates assigned for demonstration, not user or stakeholder validated",
+    "No validated incident correlation accuracy"
+  ],
+  "validation": {
+    "before_wireframes": [
+      "Task analysis across analyst and platform-owner roles",
+      "Tree test the four candidate navigation structures with representative tasks",
+      "Low-fidelity workflow walkthrough of deep-link, filtering, evidence pivot and remediation",
+      "Audit every architecture for security permissions and critical-alert visibility"
+    ],
+    "metrics": [
+      "Findability and first-click success",
+      "Wrong turns and backtracks",
+      "Task success on triage and investigation",
+      "Unnecessary context switches",
+      "Recovery from missing or mis-grouped evidence"
+    ],
+    "invalidation": "If incident-first or workflow-first consistently outperforms alert-first on priority tasks without harming critical alert access, revise the preferred IA."
+  }
+}</script>
+<script>
+'use strict';
+const data = JSON.parse(document.getElementById('seed').textContent);
+const weightsDefault = {...data.rubric.weights};
+let weights = {...weightsDefault};
+let selected = data.alternatives[0].id;
+const $ = id => document.getElementById(id);
+const escapeHtml = value => String(value).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const score = alt => 100 * Object.keys(weights).reduce((s,k)=>s+weights[k]*alt.fit_scores[k]/5,0) / Object.values(weights).reduce((a,b)=>a+b,0);
+function ranking(){return data.alternatives.map(alt=>({alt,score:score(alt)})).sort((a,b)=>b.score-a.score||a.alt.id.localeCompare(b.alt.id));}
+function renderAxis(){
+ $('axisList').innerHTML = Object.entries(data.rubric.axes).map(([key,meta])=>`<div class="axis"><div class="axheader"><label for="axis-${key}">${escapeHtml(meta.label)}</label><b id="value-${key}" class="stats">${weights[key]}</b></div><p title="${escapeHtml(meta.definition)}">${escapeHtml(meta.definition)}</p><input id="axis-${key}" type="range" min="0" max="100" step="5" value="${weights[key]}" aria-label="${escapeHtml(meta.label)} importance"></div>`).join('');
+ Object.keys(weights).forEach(key=>{$('axis-'+key).addEventListener('input', e=>{const v=Number(e.target.value);if (Object.values({...weights,[key]:v}).every(x=>x===0)){e.target.value=weights[key];$('weightStatus').textContent='All weights cannot be zero.';return;}weights[key]=v;$('value-'+key).textContent=v;$('weightStatus').textContent='Adjusted task priorities. Preference ranking updated.';renderResults();});});
+}
+function renderList(id,items){ $(id).innerHTML=items.map(x=>`<li>${escapeHtml(x)}</li>`).join(''); }
+function renderResults(){
+ const ranked=ranking(),leader=ranked[0],gap=ranked[1]?(leader.score-ranked[1].score):null;
+ $('topScore').textContent=leader.score.toFixed(1)+'/100';$('topOption').textContent=leader.alt.name;
+ $('caution').textContent=(gap!==null&&gap<5?'Leading options are within five preference-fit points. ':'')+'Rankings show only hypothetical fit. Every alternative has unverified structural assumptions and must be validated with representative users.';
+ $('options').innerHTML=ranked.map(({alt,score:val})=>`<button class="opt ${selected===alt.id?'selected':''}" data-id="${escapeHtml(alt.id)}" aria-pressed="${selected===alt.id?'true':'false'}"><div class="title"><span>${escapeHtml(alt.name)}</span>${alt.id===leader.alt.id?'<span class="tag">Highest fit</span>':''}</div><div class="number stats">${val.toFixed(1)}<small> / 100</small></div><div class="bar"><span style="width:${val.toFixed(1)}%"></span></div><div class="desc">${escapeHtml(alt.organizing_principle)}</div></button>`).join('');
+ document.querySelectorAll('.opt').forEach(el=>el.addEventListener('click',()=>{selected=el.dataset.id;renderResults();}));
+ const alt=data.alternatives.find(a=>a.id===selected);
+ $('selectedHeading').textContent=alt.name; $('selectedPrinciple').textContent=alt.organizing_principle;
+ $('tree').textContent=alt.navigation_tree.join('\n');
+ renderList('links',alt.cross_links);$('search').textContent='Search & filters: '+alt.search_and_filters;
+ renderList('benefits',alt.benefits);renderList('failures',alt.failure_modes);$('rationale').textContent='Fit estimate rationale: '+alt.fit_rationale;
+ $('walkthroughs').innerHTML=data.task_scenarios.map(s=>`<div class="walk"><b>${escapeHtml(s.goal)}</b><p>${escapeHtml(s.persona)} · ${escapeHtml(alt.task_walkthroughs[s.id]||'No path specified — gap')}</p></div>`).join('');
+ $('recommendationTitle').textContent='Provisional preference leader: '+leader.alt.name;
+ $('recommendationReason').textContent=leader.alt.id==='alert-centered'?'An alert-first model provisionally fits the supplied emphasis on speed, control and density. Preserve workflow cues and resource pivots; keep AI contextual rather than a primary destination.':'Under these adjusted weights, '+leader.alt.name+' leads on hypothetical fit. Reconsider the earlier alert-first hypothesis, but do not change IA without task and evidence review.';
+}
+function downloadJson(name,obj){const blob=new Blob([JSON.stringify(obj,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),500);}
+$('resetWeights').addEventListener('click',()=>{weights={...weightsDefault};$('weightStatus').textContent='Restored task priorities.';renderAxis();renderResults();});
+$('weightsExport').addEventListener('click',()=>downloadJson('security-alert-ia-weights.json',weights));
+$('comparisonExport').addEventListener('click',()=>{const r=ranking();downloadJson('security-alert-ia-comparison.json',{case_id:data.case_id,profile_origin:data.rubric.weight_origin,weights_used:weights,ranking:r.map(({alt,score:val})=>({id:alt.id,name:alt.name,estimated_fit:Number(val.toFixed(2))})),evidence_status:'unvalidated_illustrative_fit_estimates',known_evidence_gaps:data.known_evidence_gaps,validation:data.validation,not_authorized_to_implement:true});});
+renderAxis();renderResults();
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{
+  "decision_id": "",
+  "timestamp": "",
+  "question": "",
+  "domain": "",
+  "task_id": "",
+  "context": {
+    "primary_job": "",
+    "primary_users": [],
+    "stakeholders": [],
+    "workflow_state": "",
+    "constraints": [],
+    "open_questions": []
+  },
+  "evidence": {
+    "documented_findings": [],
+    "inferences": [],
+    "hypotheses": [],
+    "precedents": []
+  },
+  "preferences": {
+    "org_profile_id": "",
+    "effective_weights": {},
+    "task_overrides": {},
+    "autonomy_initiative": null
+  },
+  "alternatives": [
+    {
+      "id": "",
+      "summary": "",
+      "fit_scores": {},
+      "fit_rationale": {},
+      "known_constraint_violations": []
+    }
+  ],
+  "assessment": {
+    "evidence_confidence": null,
+    "confidence_rationale": "",
+    "risk": null,
+    "risk_rationale": "",
+    "reversible": null,
+    "action_requires_approval": null,
+    "unknown_constraints": []
+  },
+  "evaluation": {
+    "preferred_option": "",
+    "ranking": [],
+    "gap_points": null,
+    "sensitivity_winner_changes": [],
+    "gate": "",
+    "gate_reason": ""
+  },
+  "recommendation": {
+    "conditional_choice": "",
+    "tradeoffs": "",
+    "who_may_lose": "",
+    "conditions_that_change_choice": []
+  },
+  "validation": {
+    "method": "",
+    "primary_metric": "",
+    "guardrail_metrics": [],
+    "disconfirming_evidence": "",
+    "research_owner": ""
+  },
+  "evidence_update": {
+    "outcome_recorded": false,
+    "outcome_source": null,
+    "library_update": null
+  },
+  "information_architecture": {
+    "status": "not_started",
+    "skipped_reason": null,
+    "information_model": {
+      "objects": [],
+      "relationships": [],
+      "permissions": []
+    },
+    "task_scenarios": [],
+    "alternatives": [],
+    "preference_rubric": {
+      "axes": {},
+      "weights": {},
+      "weight_origin": ""
+    },
+    "comparison": {
+      "ranking": [],
+      "sensitivity_winner_changes": [],
+      "evidence_gaps": []
+    },
+    "provisional_primary_organizing_principle": "",
+    "optional_overlays": [],
+    "ia_validation": {
+      "method": "",
+      "tasks": [],
+      "invalidation_trigger": ""
+    }
+  }
+}

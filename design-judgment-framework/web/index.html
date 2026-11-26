@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Judgment · Preference Studio</title>
+<style>
+:root{--ink:#191e23;--muted:#617078;--line:#dce3e4;--bg:#f7f8f7;--paper:#fff;--accent:#087c76;--dark:#233d3b;--light:#e8f4f1;--warning:#7d5914}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #3caaa4;outline-offset:3px}a{color:#066b66}header{background:var(--paper);border-bottom:1px solid var(--line)}.wrap{max-width:1270px;margin:0 auto;padding:0 26px}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;padding-top:24px;padding-bottom:20px;flex-wrap:wrap}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-weight:800;font-size:10px;color:var(--accent)}h1{margin:4px 0 2px;font-size:30px;line-height:1.15;letter-spacing:-.038em}h2{font-size:17px;letter-spacing:-.015em;margin:0 0 7px}h3{font-size:15px;margin:0 0 3px}p{margin:0}.sub,.micro{color:var(--muted)}.sub{font-size:13px}.micro{font-size:12px}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}button{border:1px solid #cbd6d6;border-radius:8px;background:#fff;color:#203536;padding:9px 12px;font-weight:600}button.primary{background:var(--dark);color:#fff;border-color:var(--dark)}button.ghost{border:0;background:transparent;color:#006d68;padding:5px}.layout{display:grid;grid-template-columns:minmax(340px,1.05fr) minmax(340px,.95fr);gap:20px;margin:22px auto 60px}.panel{border:1px solid var(--line);border-radius:13px;background:var(--paper);box-shadow:0 2px 8px #121f1f05}.panel-head{padding:21px 22px 15px;border-bottom:1px solid var(--line)}.panel-body{padding:18px 22px}.tag{display:inline-flex;align-items:center;background:#e9eeee;color:#476063;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:700}.tag.green{background:#e3f3ec;color:#176044}.segment{display:flex;background:#eef2f0;border:1px solid var(--line);padding:3px;border-radius:9px;width:100%;margin:15px 0 14px}.segment button{flex:1;background:transparent;border:0;color:#526265;padding:8px 10px}.segment button.active{background:#fff;color:#153330;box-shadow:0 1px 3px #0002}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.taskbar{display:flex;gap:8px;margin:10px 0 7px}.taskbar select{flex:1;min-width:0;padding:9px;border:1px solid var(--line);border-radius:8px;background:#fff}.section-label{font-weight:700;color:#354c4a;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin:21px 0 12px}.axis{border-top:1px solid #eef1f0;padding:13px 0 12px}.axis:first-child{border:0}.axis label{font-weight:700;font-size:13px}.axis .axismeta{display:flex;align-items:center;gap:8px}.axis .num{font-variant-numeric:tabular-nums;font-weight:800;font-size:15px;color:var(--dark);min-width:30px;text-align:right}.axis .desc{font-size:11px;color:var(--muted);margin:3px 0 8px}.axis input[type=range]{width:100%;height:5px;accent-color:var(--accent);cursor:pointer}.inherit{font-size:11px;color:var(--muted)}.axis button.reset{font-size:11px;padding:2px 6px;background:transparent;border:0;color:#08736d}.fine{padding:11px 13px;border-radius:8px;background:#f2f6f5;font-size:12px;color:#405956;margin:12px 0}.locknote{display:flex;gap:10px;align-items:start;border-top:1px solid var(--line);padding-top:16px;color:#53615d;font-size:12px}.lockicon{background:#e9eeeb;padding:4px 8px;border-radius:6px}.summary-top{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 18px}.metric{border:1px solid var(--line);border-radius:9px;padding:13px}.metric strong{display:block;font-size:25px;line-height:1.1;letter-spacing:-.04em}.metric p{font-size:11px;color:var(--muted);margin-top:7px}.option{border:1px solid var(--line);border-radius:10px;padding:15px;margin-bottom:10px}.option.first{border:2px solid var(--accent);background:#fbfefd}.score{font-size:25px;letter-spacing:-.045em;line-height:1;font-weight:750;font-variant-numeric:tabular-nums}.score small{font-size:13px;color:#72807e;letter-spacing:0}.bar{background:#e9eeee;border-radius:4px;height:6px;overflow:hidden;margin:11px 0}.bar > span{display:block;height:100%;background:#6f9b97;border-radius:4px}.option.first .bar>span{background:var(--accent)}.option p{color:var(--muted);font-size:12px}.pill{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--accent)}.callout{border:1px solid #d8e4dd;border-left:3px solid var(--accent);padding:14px 15px;border-radius:7px;background:#f6faf7;margin-top:16px}.callout h3{font-size:13px}.callout p{font-size:12px;color:#50625a}.mini{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:11px 0;color:var(--muted);font-size:12px}.badge-num{font-size:12px;font-variant-numeric:tabular-nums;color:#315451;font-weight:800}details{margin:13px 0}summary{cursor:pointer;font-weight:700;font-size:12px;color:var(--accent)}table{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}th,td{padding:6px;text-align:left;border-bottom:1px solid #eef1f0}td:not(:first-child),th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}.footnote{font-size:11px;color:var(--muted);margin-top:14px}.notice{font-size:12px;color:#775821;background:#fcf7ea;border-radius:8px;padding:10px;margin:8px 0 0}.status{font-size:12px;color:#33534e;min-height:18px;margin:12px 0}footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-size:12px}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media(max-width:860px){.layout{grid-template-columns:1fr}.wrap{padding:0 15px}.panel-head,.panel-body{padding:16px}h1{font-size:26px}.summary-top{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+  <div><div class="eyebrow">DESIGN JUDGMENT / CONFIGURATION STUDIO · V1</div><h1>Make design priorities explicit.</h1><p class="sub">Tune organization defaults, override them for a task, and inspect how decisions change.</p></div>
+  <div class="toolbar"><a href="ia-explorer.html" style="text-decoration:none;font-weight:700;border:1px solid #cbd6d6;border-radius:8px;padding:9px 12px;background:#e8f4f1;color:#17655e">Explore IA alternatives</a><button id="importBtn" type="button">Import JSON</button><input id="importFile" type="file" accept="application/json,.json" class="sr"><button id="exportBtn" type="button" class="primary">Export JSON</button></div>
+</div></header>
+<main class="wrap layout">
+<section class="panel" aria-labelledby="prefsHead"><div class="panel-head"><div class="row"><div><div class="eyebrow">01 / YOUR PRIORITIES</div><h2 id="prefsHead">Value settings</h2></div><span class="tag">8 dimensions</span></div><p class="micro">Sliders represent relative importance (0–100), not percentages. They rank alternatives but cannot override constraints.</p></div>
+<div class="panel-body"><div class="segment" role="group" aria-label="Edit level"><button id="orgTab" type="button" class="active" aria-pressed="true">Organization defaults</button><button id="taskTab" type="button" aria-pressed="false">Task overrides</button></div>
+<div id="orgBlock"><p class="micro">These become the defaults for new design decisions in your organization.</p></div>
+<div id="taskBlock" hidden><p class="micro">Only modified priorities override the organization. All other priorities stay inherited.</p><div class="taskbar"><select id="taskSelect" aria-label="Task profile"></select><button type="button" id="addTask">+ Task</button></div></div>
+<div class="section-label">Decision trade-off dimensions</div><div id="axisList"></div>
+<div class="section-label">Agent initiative</div><div class="axis"><div class="row"><label for="initiativeRange">Proactive within low-risk decisions</label><span class="num" id="initiativeValue"></span></div><p class="desc">Higher values slightly widen the threshold for reversible, low-risk decisions. No setting permits autonomous high-risk or external actions.</p><input id="initiativeRange" type="range" min="0" max="100" step="5" aria-label="Agent initiative"><div class="row"><span class="micro">Conservative</span><span class="micro">Proactive</span></div><div class="row"><div id="initiativeStatus" class="inherit"></div><button id="initiativeInherit" type="button" class="ghost" hidden>↺ Inherit organization</button></div></div>
+<div class="locknote"><span class="lockicon" aria-hidden="true">▣</span><div><strong>Always enforced</strong><p>Mandatory security, legal, privacy, and accessibility requirements. Known violations block options; unresolved requirements trigger review.</p></div></div>
+<div class="fine">Preference weights express what matters to the organization, not the strength of research. Fit scores for this example are deliberately illustrative.</div>
+<button type="button" id="resetDemo">Restore example defaults</button><div class="status" id="status" aria-live="polite"></div>
+</div></section>
+<section class="panel" aria-labelledby="resultHead"><div class="panel-head"><div class="eyebrow">02 / LIVE DECISION PREVIEW</div><h2 id="resultHead">Developer project setup</h2><p class="micro">Example question: Should advanced configuration appear before a developer can run a project?</p><p class="micro" id="previewProfile" style="margin-top:6px;font-weight:700"></p></div>
+<div class="panel-body"><div class="summary-top"><div class="metric"><span class="micro">Evidence confidence · assessed</span><strong>46%</strong><p>Published principles and estimates; no direct usability results.</p></div><div class="metric"><span class="micro">Decision risk · assessed</span><strong>26%</strong><p>Reversible UI prototype. A production release requires a fresh assessment.</p></div></div>
+<div class="row"><h3>Options ranked by priorities</h3><span class="tag">Estimated fit</span></div><p class="micro" style="margin:0 0 14px">Weighted score, 0–100. A higher score is not empirical proof.</p><div id="options"></div><div id="uncertainty"></div>
+<details><summary>Inspect weights and option fit ratings</summary><div style="overflow:auto" id="fitTable"></div></details>
+<div class="callout"><div class="eyebrow">AGENT DECISION GATE</div><h3 id="gateLabel"></h3><p id="gateReason"></p></div>
+<div class="section-label">Next validation</div><p style="font-size:13px">Test first-preview completion and recovery across projects with and without advanced configuration requirements.</p><p class="footnote">To use the modified preferences with any compatible agent, export JSON and replace <code>profiles/preferences.json</code> in the skill package. The decision engine will resolve each task's overrides.</p>
+</div></section>
+</main>
+<footer><div class="wrap">Design Judgment Framework · Offline interface · No account, network access, or external dependencies. Source example is illustrative, not a product study. <a href="https://agentskills.io/specification">Agent Skills format</a>.</div></footer>
+<script type="application/json" id="seedConfig">{
+  "schema_version": "1.0",
+  "axes": {
+    "efficiency": {
+      "label": "Workflow efficiency",
+      "description": "Short task paths, minimal context switching and time to completion."
+    },
+    "learnability": {
+      "label": "Learnability and guidance",
+      "description": "How quickly unfamiliar users can understand and complete the workflow."
+    },
+    "discoverability": {
+      "label": "Feature discoverability",
+      "description": "Can users find capabilities and essential next steps?"
+    },
+    "flexibility": {
+      "label": "Flexibility and control",
+      "description": "Advanced configuration, customization, expert control."
+    },
+    "transparency": {
+      "label": "System visibility",
+      "description": "Status, diagnostics, consequences, and decision legibility."
+    },
+    "consistency": {
+      "label": "Consistency",
+      "description": "Reuse familiar conventions and coherent patterns."
+    },
+    "recoverability": {
+      "label": "Recoverability",
+      "description": "Prevent catastrophic failure, support undo and restore progress."
+    },
+    "collaboration": {
+      "label": "Collaboration",
+      "description": "Shared context, handoff, ownership, and coordinating work."
+    }
+  },
+  "organization": {
+    "id": "sample-developer-org",
+    "name": "Example developer-product organization",
+    "domain": "developer",
+    "priority_weights": {
+      "efficiency": 75,
+      "learnability": 65,
+      "discoverability": 60,
+      "flexibility": 80,
+      "transparency": 80,
+      "consistency": 55,
+      "recoverability": 85,
+      "collaboration": 55
+    },
+    "autonomy_initiative": 40,
+    "hard_constraints": [
+      "Applicable accessibility requirements",
+      "Applicable privacy and data protection requirements",
+      "Security and authorization boundaries",
+      "Applicable legal and compliance obligations"
+    ],
+    "notes": "Example weights are framework-authored starting points, not empirical evidence or vendor defaults."
+  },
+  "tasks": [
+    {
+      "id": "project-setup",
+      "name": "Connect an existing app",
+      "priority_weight_overrides": {
+        "efficiency": 90,
+        "learnability": 85,
+        "discoverability": 70,
+        "transparency": 65
+      },
+      "autonomy_initiative_override": 30,
+      "notes": "Example: learning and first-use completion matter more in setup than in a daily expert operation."
+    }
+  ]
+}</script>
+<script type="application/json" id="seedCase">{
+  "case_id": "example-project-setup",
+  "title": "Should advanced settings appear upfront in project setup?",
+  "domain": "developer",
+  "task_id": "project-setup",
+  "scope": "Hypothetical illustrative decision, not a historical claim about any company",
+  "primary_job": "Connect an existing application and run a working preview",
+  "primary_user": "Application developer new to the product (experience with code may still be high)",
+  "uncertainties": [
+    "Actual required configurations vary by repository",
+    "No measured frequency of advanced settings use",
+    "No user validation of proposed options"
+  ],
+  "options": [
+    {
+      "id": "all-upfront",
+      "name": "All settings upfront",
+      "description": "Show all configuration controls in one dense flow",
+      "fit_scores": {
+        "efficiency": 2,
+        "learnability": 2,
+        "discoverability": 5,
+        "flexibility": 5,
+        "transparency": 5,
+        "consistency": 3,
+        "recoverability": 3,
+        "collaboration": 3
+      },
+      "evidence_note": "All ratings are untested illustrative estimates",
+      "violates_constraints": []
+    },
+    {
+      "id": "progressive",
+      "name": "Progressive configuration",
+      "description": "Essential inputs first; advanced settings remain accessible and reversible",
+      "fit_scores": {
+        "efficiency": 5,
+        "learnability": 5,
+        "discoverability": 4,
+        "flexibility": 4,
+        "transparency": 4,
+        "consistency": 4,
+        "recoverability": 4,
+        "collaboration": 3
+      },
+      "evidence_note": "All ratings are untested illustrative estimates",
+      "violates_constraints": []
+    },
+    {
+      "id": "guided",
+      "name": "Auto-detect and guided setup",
+      "description": "Try detecting settings and guide the user through recovery when needed",
+      "fit_scores": {
+        "efficiency": 5,
+        "learnability": 4,
+        "discoverability": 3,
+        "flexibility": 3,
+        "transparency": 3,
+        "consistency": 4,
+        "recoverability": 5,
+        "collaboration": 3
+      },
+      "evidence_note": "All ratings are untested illustrative estimates",
+      "violates_constraints": []
+    }
+  ],
+  "assessment": {
+    "evidence_confidence": 0.46,
+    "risk": 0.26,
+    "reversible": true,
+    "action_requires_approval": false,
+    "hard_constraint_violations": [],
+    "unknown_constraints": [],
+    "confidence_rationale": "The design is consistent with published principles, but no direct task study or analytics are provided",
+    "risk_rationale": "A design draft/prototype is reversible, but a poor setup experience could block task success. Production rollout would need its own risk review."
+  },
+  "validation": {
+    "method": "Usability prototype comparison plus repository task coverage audit",
+    "primary_metric": "Successful first preview within task session",
+    "guardrails": [
+      "Setup errors",
+      "Time to recovery",
+      "Advanced setting discovery"
+    ],
+    "invalidating_result": "If users needing non-default configuration cannot discover it or recover from auto-detection errors, revise or choose another option"
+  }
+}</script>
+<script>
+'use strict';
+const initial=JSON.parse(document.getElementById('seedConfig').textContent);
+const decision=JSON.parse(document.getElementById('seedCase').textContent);
+const axes=Object.keys(initial.axes);let config=structuredClone(initial), mode='org', taskId='project-setup';
+const $=id=>document.getElementById(id);const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const currentTask=()=>config.tasks.find(t=>t.id===taskId);
+function weights(){let w={...config.organization.priority_weights};return mode==='org' ? w : Object.assign(w,currentTask()?.priority_weight_overrides||{});}
+function initiative(){return mode==='org' ? config.organization.autonomy_initiative : (currentTask()?.autonomy_initiative_override ?? config.organization.autonomy_initiative);}
+function safeText(v){return String(v??'');}
+function configureTabs(){let o=mode==='org';$('orgTab').classList.toggle('active',o);$('taskTab').classList.toggle('active',!o);$('orgTab').setAttribute('aria-pressed',String(o));$('taskTab').setAttribute('aria-pressed',String(!o));$('orgBlock').hidden=!o;$('taskBlock').hidden=o;}
+function showTasks(){const el=$('taskSelect');el.replaceChildren();for(const t of config.tasks){const op=document.createElement('option');op.value=t.id;op.textContent=t.name;el.append(op);}if(!currentTask()){taskId=config.tasks[0]?.id;}el.value=taskId;}
+function axisRow(axis){const meta=config.axes[axis],task=currentTask(), org=config.organization.priority_weights[axis], val=mode==='org'?org:weights()[axis], overridden=mode==='task'&&Object.prototype.hasOwnProperty.call(task?.priority_weight_overrides||{},axis);
+const box=document.createElement('div');box.className='axis';
+const top=document.createElement('div');top.className='row';
+const label=document.createElement('label');label.textContent=meta.label;label.htmlFor=`range-${axis}`;
+const right=document.createElement('span');right.className='axismeta';
+const num=document.createElement('span');num.className='num';num.textContent=val;right.append(num);
+if(mode==='task'){const reset=document.createElement('button');reset.type='button';reset.className='reset';reset.textContent=overridden?'↺ Inherit':'Inherited';reset.disabled=!overridden;reset.title='Use the organization default';reset.onclick=()=>{delete currentTask().priority_weight_overrides[axis];render();};right.append(reset);}
+top.append(label,right);box.append(top);
+const desc=document.createElement('p');desc.className='desc';desc.textContent=meta.description;box.append(desc);
+const range=document.createElement('input');range.id=`range-${axis}`;range.type='range';range.min=0;range.max=100;range.step=5;range.value=val;
+range.addEventListener('input',()=>{let v=Number(range.value);if(mode==='org')config.organization.priority_weights[axis]=v;else currentTask().priority_weight_overrides[axis]=v;num.textContent=v;if(mode==='task'){resetRefresh();}renderDecision();});
+box.append(range);const note=document.createElement('div');note.className='inherit';note.textContent=mode==='task'?(overridden?`Task override · org default ${org}`:`Inherited from organization · ${org}`):`${val===0?'Ignored for ranking':'Relative priority for ranking'}`;box.append(note);
+function resetRefresh(){const isOverridden=Object.prototype.hasOwnProperty.call(currentTask().priority_weight_overrides,axis);if(mode==='task'){right.querySelector('button').disabled=!isOverridden;right.querySelector('button').textContent=isOverridden?'↺ Inherit':'Inherited';note.textContent=`Task override · org default ${config.organization.priority_weights[axis]}`;}}
+return box;}
+function drawSliders(){configureTabs();showTasks();$('axisList').replaceChildren(...axes.map(axisRow));let val=mode==='org'?config.organization.autonomy_initiative:initiative();$('initiativeRange').value=val;$('initiativeValue').textContent=val;$('initiativeStatus').textContent=mode==='task'?(currentTask()?.autonomy_initiative_override == null ? 'Inherited from organization' : 'Task-specific override'):'Applies to all tasks unless overridden';$('initiativeInherit').hidden=mode!=='task'||currentTask()?.autonomy_initiative_override == null;}
+function score(opt,w){let s=Object.values(w).reduce((a,b)=>a+b,0);if(s===0)return null;return 100*axes.reduce((sum,a)=>sum+w[a]*opt.fit_scores[a]/5,0)/s;}
+function ranking(w=weights()){return decision.options.map(opt=>({...opt,score:score(opt,w)})).sort((a,b)=>(b.score??-1)-(a.score??-1));}
+function gate(){let a=decision.assessment,threshold=.20+.002*initiative();if(a.hard_constraint_violations.length)return ['Blocked','Known mandatory-constraint violation.'];if(a.unknown_constraints.length)return ['Human review','Unresolved constraints must be reviewed.'];if(a.action_requires_approval)return ['Human approval required','This action requires explicit permission.'];if(a.risk>=.65||(!a.reversible&&a.risk>=.3))return ['Human approval required','High-impact or difficult-to-reverse change.'];if(a.risk>=.35&&a.evidence_confidence<.5)return ['Research required','Insufficient evidence for material risk.'];if(a.reversible&&a.risk<=threshold){if(a.evidence_confidence>=.7)return ['Low-risk autonomous proposal','Only work already authorized and within existing permissions.'];return ['Prototype and validate','Low-risk reversible experiment, but evidence is currently weak.'];}return ['Human review','Current risk and evidence do not meet the limited autonomy criteria.'];}
+function node(tag,klass,txt){let e=document.createElement(tag);if(klass)e.className=klass;if(txt!=null)e.textContent=txt;return e;}
+function renderDecision(){let w=weights(), opts=ranking(w), o=$('options');$('previewProfile').textContent=mode==='org'?'Preview uses organization defaults':`Preview uses “${currentTask()?.name||'selected task'}” priorities on this example decision`; o.replaceChildren();if(opts[0].score===null){o.append(node('p','notice','At least one priority weight must be nonzero to rank alternatives.'));}else{opts.forEach((p,i)=>{const card=node('div','option'+(i===0?' first':''));const top=node('div','row');const left=node('div');left.append(node('div','pill',i===0?'Leading option · estimate':`Option ${i+1}`),node('h3','',p.name));top.append(left);const val=node('div','score',p.score.toFixed(1));val.append(node('small','',' / 100'));top.append(val);card.append(top);const track=node('div','bar');const fill=node('span');fill.style.width=clamp(p.score,0,100)+'%';track.append(fill);card.append(track,node('p','',p.description));o.append(card);});}
+let warnings=[];if(opts.length>1&&opts[0].score!==null&&opts[0].score-opts[1].score<5)warnings.push('Near tie: less than 5 points between leading options.');
+let switches=[];if(opts[0].score!==null){axes.forEach(axis=>[-20,20].forEach(d=>{let adj={...w,[axis]:clamp(w[axis]+d,0,100)};if(adj[axis]!==w[axis]&&ranking(adj)[0].id!==opts[0].id)switches.push(axis);}));}
+if(switches.length)warnings.push('Sensitivity: the preferred option changes when priorities shift (±20 points on '+[...new Set(switches)].join(', ')+').');
+$('uncertainty').replaceChildren(...warnings.map(t=>node('div','notice',t)));
+const [g,r]=gate();$('gateLabel').textContent=g;$('gateReason').textContent=r;
+renderTable(w,opts);
+}
+function renderTable(w,opts){const table=node('table');const head=node('thead');let row=node('tr');['Dimension','Importance',...opts.map(p=>p.name)].forEach(x=>row.append(node('th','',x)));head.append(row);table.append(head);const body=node('tbody');for(const a of axes){row=node('tr');[config.axes[a].label,String(w[a]),...opts.map(o=>String(o.fit_scores[a])+'/5')].forEach(x=>row.append(node('td','',x)));body.append(row);}table.append(body);$('fitTable').replaceChildren(table);}
+function render(){drawSliders();renderDecision();}
+$('orgTab').onclick=()=>{mode='org';render();};$('taskTab').onclick=()=>{mode='task';render();};$('taskSelect').onchange=e=>{taskId=e.target.value;render();};
+$('addTask').onclick=()=>{const name=prompt('Name this task profile (e.g. Security permission review):');if(!name?.trim())return;let id=name.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');if(!id)id='task';let base=id,n=2;while(config.tasks.some(t=>t.id===id))id=base+'-'+n++;config.tasks.push({id,name:name.trim(),priority_weight_overrides:{},notes:'Created in Preference Studio'});taskId=id;mode='task';render();};
+$('initiativeInherit').onclick=()=>{if(currentTask())delete currentTask().autonomy_initiative_override;render();};
+$('initiativeRange').oninput=e=>{const v=Number(e.target.value);if(mode==='org')config.organization.autonomy_initiative=v;else currentTask().autonomy_initiative_override=v;$('initiativeValue').textContent=v;$('initiativeStatus').textContent=mode==='org'?'Applies to tasks unless overridden':'Task-specific override';$('initiativeInherit').hidden=mode!=='task';renderDecision();};
+$('resetDemo').onclick=()=>{config=structuredClone(initial);taskId='project-setup';mode='org';render();$('status').textContent='Example defaults restored.';};
+$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(config,null,2)+'\n'],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='preferences.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('status').textContent='Exported. Replace profiles/preferences.json in the skills bundle.';};
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{let c=JSON.parse(await f.text());validate(c);config=c;taskId=c.tasks[0]?.id;mode='org';render();$('status').textContent='Imported preference configuration.';}catch(error){$('status').textContent='Import failed: '+error.message;}e.target.value='';};
+function validate(c){if(!c?.organization?.priority_weights||!Array.isArray(c.tasks)||!c.tasks.length||!c.axes)throw Error('Missing configuration fields');for(const a of axes){const x=c.organization.priority_weights[a];if(typeof x!=='number'||x<0||x>100||!c.axes[a])throw Error('Invalid dimension: '+a);}if(typeof c.organization.autonomy_initiative!=='number'||c.organization.autonomy_initiative<0||c.organization.autonomy_initiative>100)throw Error('Invalid initiative');for(const t of c.tasks){if(!t.id||!t.name||!t.priority_weight_overrides)throw Error('Invalid task');for(const [k,v] of Object.entries(t.priority_weight_overrides))if(!axes.includes(k)||typeof v!=='number'||v<0||v>100)throw Error('Invalid task override');if(t.autonomy_initiative_override!=null&&(typeof t.autonomy_initiative_override!=='number'||t.autonomy_initiative_override<0||t.autonomy_initiative_override>100))throw Error('Invalid task initiative');}}
+render();
+</script>
+</body>
+</html>

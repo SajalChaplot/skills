@@ -1,0 +1,31 @@
+{
+  "action": "REVISIT",
+  "status": "in_progress",
+  "reason": "Reopen only invalidated stage(s) and their dependent outputs; preserve unaffected evidence.",
+  "rerun_stages": [
+    "information_architecture",
+    "options",
+    "governance",
+    "validation",
+    "decision_record"
+  ],
+  "budgets_used": {
+    "total_revisions": 1,
+    "reported_tool_calls": 4,
+    "stage_reentries": {
+      "information_architecture": 1,
+      "options": 1,
+      "governance": 1,
+      "validation": 1,
+      "decision_record": 1
+    }
+  },
+  "warnings": [
+    "Previously displayed downstream artifacts should be marked stale until rebuilt."
+  ],
+  "authorization": "No production, external, irreversible, or privileged action authorized",
+  "decision_id": "security-alert-navigation",
+  "elapsed_minutes": 0.0,
+  "decision_revisions": 1,
+  "stagnant_cycles": 0
+}

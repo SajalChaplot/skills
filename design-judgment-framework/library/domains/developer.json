@@ -1,0 +1,78 @@
+{
+  "domain": "developer",
+  "status": "initial_research_hypotheses",
+  "reviewed_on": "2026-11-24",
+  "profile_guidance": "Personas and primary jobs vary by workflow. The following are candidate rules, not universally proven truths.",
+  "contexts": [
+    "first-time setup",
+    "daily coding",
+    "debugging",
+    "collaborative code review",
+    "deployment",
+    "configuration and administration"
+  ],
+  "potential_personas": [
+    "application developer",
+    "platform engineer",
+    "reviewer/maintainer",
+    "security engineer",
+    "administrator"
+  ],
+  "conditional_rules": [
+    {
+      "id": "dev-1",
+      "when": "Primary goal is to complete common setup with varying user familiarity",
+      "prefer": "Start with essentials while keeping advanced configuration reachable",
+      "because": "Reduces required initial decisions without creating dead ends",
+      "unless": "Critical inputs or consequences must be exposed before proceeding",
+      "check": "First-run completion, failed setup diagnoses, discovery of advanced controls",
+      "status": "research_synthesis",
+      "references": [
+        "https://design.gitlab.com/about/principles/",
+        "https://stripe.com/blog/payment-api-design"
+      ]
+    },
+    {
+      "id": "dev-2",
+      "when": "A user is performing a focused, time-sensitive task",
+      "prefer": "Keep secondary controls visually restrained and contextually accessible",
+      "because": "Reduces attention competition and unnecessary context switching",
+      "unless": "Safety or diagnosis demands continuous visibility",
+      "check": "Task time, return-to-task errors, important status missed",
+      "status": "research_synthesis",
+      "references": [
+        "https://github.com/microsoft/vscode/blob/main/.github/skills/design-philosophy/SKILL.md"
+      ]
+    },
+    {
+      "id": "dev-3",
+      "when": "A workflow involves potential errors or uncertain system state",
+      "prefer": "Show actionable status, recovery paths and diagnostics",
+      "because": "Users must understand errors to recover and trust the system",
+      "unless": "Showing sensitive internals violates policy",
+      "check": "Recovery rate, time to resolution, support requests",
+      "status": "research_synthesis",
+      "references": [
+        "https://design.gitlab.com/about/principles/"
+      ]
+    },
+    {
+      "id": "dev-4",
+      "when": "Complex customization is genuinely required",
+      "prefer": "Preserve an expert path and settings persistence",
+      "because": "Simplification should not create irreversible limitations",
+      "unless": "Customization undermines nonnegotiable security or policy",
+      "check": "Advanced capability task success and later migration cost",
+      "status": "research_synthesis",
+      "references": [
+        "https://stripe.com/blog/payment-api-design"
+      ]
+    }
+  ],
+  "known_gaps": [
+    "No evidence that one developer persona is always primary",
+    "Most rules rely on published philosophy rather than measured outcomes",
+    "Need more documented design alternatives and direct user findings",
+    "No domain-specific accessibility or regulatory certification"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "case_id": "example-project-setup",
+  "title": "Should advanced settings appear upfront in project setup?",
+  "domain": "developer",
+  "task_id": "project-setup",
+  "scope": "Hypothetical illustrative decision, not a historical claim about any company",
+  "primary_job": "Connect an existing application and run a working preview",
+  "primary_user": "Application developer new to the product (experience with code may still be high)",
+  "uncertainties": [
+    "Actual required configurations vary by repository",
+    "No measured frequency of advanced settings use",
+    "No user validation of proposed options"
+  ],
+  "options": [
+    {
+      "id": "all-upfront",
+      "name": "All settings upfront",
+      "description": "Show all configuration controls in one dense flow",
+      "fit_scores": {
+        "efficiency": 2,
+        "learnability": 2,
+        "discoverability": 5,
+        "flexibility": 5,
+        "transparency": 5,
+        "consistency": 3,
+        "recoverability": 3,
+        "collaboration": 3
+      },
+      "evidence_note": "All ratings are untested illustrative estimates",
+      "violates_constraints": []
+    },
+    {
+      "id": "progressive",
+      "name": "Progressive configuration",
+      "description": "Essential inputs first; advanced settings remain accessible and reversible",
+      "fit_scores": {
+        "efficiency": 5,
+        "learnability": 5,
+        "discoverability": 4,
+        "flexibility": 4,
+        "transparency": 4,
+        "consistency": 4,
+        "recoverability": 4,
+        "collaboration": 3
+      },
+      "evidence_note": "All ratings are untested illustrative estimates",
+      "violates_constraints": []
+    },
+    {
+      "id": "guided",
+      "name": "Auto-detect and guided setup",
+      "description": "Try detecting settings and guide the user through recovery when needed",
+      "fit_scores": {
+        "efficiency": 5,
+        "learnability": 4,
+        "discoverability": 3,
+        "flexibility": 3,
+        "transparency": 3,
+        "consistency": 4,
+        "recoverability": 5,
+        "collaboration": 3
+      },
+      "evidence_note": "All ratings are untested illustrative estimates",
+      "violates_constraints": []
+    }
+  ],
+  "assessment": {
+    "evidence_confidence": 0.46,
+    "risk": 0.26,
+    "reversible": true,
+    "action_requires_approval": false,
+    "hard_constraint_violations": [],
+    "unknown_constraints": [],
+    "confidence_rationale": "The design is consistent with published principles, but no direct task study or analytics are provided",
+    "risk_rationale": "A design draft/prototype is reversible, but a poor setup experience could block task success. Production rollout would need its own risk review."
+  },
+  "validation": {
+    "method": "Usability prototype comparison plus repository task coverage audit",
+    "primary_metric": "Successful first preview within task session",
+    "guardrails": [
+      "Setup errors",
+      "Time to recovery",
+      "Advanced setting discovery"
+    ],
+    "invalidating_result": "If users needing non-default configuration cannot discover it or recover from auto-detection errors, revise or choose another option"
+  }
+}

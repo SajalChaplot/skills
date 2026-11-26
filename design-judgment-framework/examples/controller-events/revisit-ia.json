@@ -1,0 +1,11 @@
+{
+  "decision_id": "security-alert-navigation",
+  "trigger": "contradiction",
+  "reason": "An analyst investigation requires pivoting by asset; the first IA evaluation missed this non-linear path.",
+  "invalidates": ["information_architecture"],
+  "new_evidence_ids": ["walkthrough-asset-pivot-001"],
+  "material_change_fingerprint": "asset-pivot-decision-v2",
+  "risk_level": "low",
+  "mandatory_constraint_status": "clear",
+  "tool_calls_delta": 4
+}

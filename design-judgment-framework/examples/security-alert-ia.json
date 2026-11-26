@@ -1,0 +1,384 @@
+{
+  "schema_version": "1.1",
+  "case_id": "security-alert-ia-exploration",
+  "title": "Information architecture exploration for security alerts",
+  "domain": "security",
+  "case_type": "reconstructed_illustrative_ia_exploration",
+  "status_note": "Reconstructed from an earlier design discussion. Only eight priority inputs and the four candidate structures are provided by that discussion. Trees, scenario paths and numerical fit scores below are authored examples; they are NOT measured user outcomes.",
+  "design_question": "Should alerts, workflows, resources or correlated incidents organize the primary security investigation experience?",
+  "scope_and_context": {
+    "primary_job": "Prioritize urgent alerts, investigate evidence, and take controlled remediation action",
+    "primary_beneficiary": "Security analyst handling triage and investigation",
+    "secondary_users": [
+      "Security response lead",
+      "Platform/service owner"
+    ],
+    "evidence_status": "user task and personas inferred from the assignment context; needs observation",
+    "assumptions": [
+      "Analysts frequently enter via an alerts queue",
+      "Analysts need non-linear pivots between alert and resource evidence",
+      "Reliability of incident correlation is unknown"
+    ],
+    "hard_constraints": [
+      "Authorization and auditability for remediation actions",
+      "Critical alerts must remain accessible",
+      "Applicable privacy, security and accessibility requirements"
+    ]
+  },
+  "information_model": {
+    "entities": [
+      "Alert",
+      "Event / evidence",
+      "Asset / service",
+      "Incident (optional grouping)",
+      "User / owner",
+      "Remediation action"
+    ],
+    "relationships": [
+      "Alert references one or more evidence items",
+      "Alert can affect one or more assets",
+      "Incident groups zero or more alerts when correlation is supported",
+      "Alert and incident can have owners and state transitions",
+      "Remediation actions must be authorized and auditable"
+    ],
+    "unknowns": [
+      "Cardinality in underlying product",
+      "Correlation reliability and editing rules",
+      "Real user terminology and information hierarchy"
+    ]
+  },
+  "task_scenarios": [
+    {
+      "id": "triage",
+      "persona": "Security analyst",
+      "entry": "Alerts list/queue",
+      "goal": "Identify the most urgent unresolved alert and its likely blast radius",
+      "edge_case": "High-volume alerts with duplicate signals"
+    },
+    {
+      "id": "investigate",
+      "persona": "Security analyst",
+      "entry": "Notification / bookmarked deep link",
+      "goal": "Inspect alert evidence and pivot to related assets or events",
+      "edge_case": "Missing enrichment and partial data"
+    },
+    {
+      "id": "remediate",
+      "persona": "Security analyst or responder",
+      "entry": "Active investigation",
+      "goal": "Assign ownership, record decision and initiate remediation",
+      "edge_case": "Responder lacks permission for a destructive action"
+    },
+    {
+      "id": "asset",
+      "persona": "Platform or infrastructure owner",
+      "entry": "Specific asset or service",
+      "goal": "Find all alerts affecting that resource",
+      "edge_case": "Resource participates in multiple incidents"
+    }
+  ],
+  "rubric": {
+    "weight_origin": "User-supplied task priority overrides from prior security-alert concept review; not research defaults",
+    "scoring_scale": "0–5 estimated option fit; not measured",
+    "axes": {
+      "efficiency": {
+        "label": "Efficiency",
+        "definition": "How directly a user reaches high-priority tasks across entry points",
+        "rubric_0": "Unnecessary detours and context loss",
+        "rubric_5": "Direct access with context continuity"
+      },
+      "information_density": {
+        "label": "Information density",
+        "definition": "Useful decision context available without overwhelming the user",
+        "rubric_0": "Important context scattered or buried",
+        "rubric_5": "Critical context simultaneously accessible and distinguishable"
+      },
+      "discoverability": {
+        "label": "Discoverability",
+        "definition": "How well the hierarchy and labels expose where functions live",
+        "rubric_0": "Important functions hard to locate",
+        "rubric_5": "Clear, predictable paths for intended users"
+      },
+      "user_control": {
+        "label": "User control",
+        "definition": "Nonlinear navigation, filtering, exploration and recovery freedom",
+        "rubric_0": "Rigid sequence and limited navigation",
+        "rubric_5": "Strong user-directed investigation and traversal"
+      },
+      "guidance": {
+        "label": "Guidance",
+        "definition": "Support for knowing the next appropriate action during the task",
+        "rubric_0": "No visible next steps",
+        "rubric_5": "Clear, contextual guidance without excessive restriction"
+      },
+      "flexibility": {
+        "label": "Flexibility",
+        "definition": "Ability to support alternate jobs and future pivots in the task",
+        "rubric_0": "Single narrow task flow",
+        "rubric_5": "Multiple efficient paths with predictable structure"
+      },
+      "consistency": {
+        "label": "Consistency",
+        "definition": "Stable recognizable entities, labels and navigation patterns",
+        "rubric_0": "Disjointed and unpredictable structure",
+        "rubric_5": "Coherent recognizable organization"
+      },
+      "simplicity": {
+        "label": "Simplicity",
+        "definition": "Ease of understanding the organizational model, not raw screen sparseness",
+        "rubric_0": "Unclear grouping and high translation burden",
+        "rubric_5": "Comprehensible groups and predictable mental map"
+      }
+    },
+    "weights": {
+      "efficiency": 90,
+      "information_density": 80,
+      "discoverability": 55,
+      "user_control": 95,
+      "guidance": 70,
+      "flexibility": 70,
+      "consistency": 85,
+      "simplicity": 80
+    }
+  },
+  "alternatives": [
+    {
+      "id": "alert-centered",
+      "name": "Alert-centered / object-oriented",
+      "organizing_principle": "Individual alert is canonical entry object; actions and related context hang off the alert",
+      "default_entry": "Alerts / prioritized queue",
+      "navigation_tree": [
+        "Alerts",
+        "  ├─ Active alerts",
+        "  ├─ Assigned to me",
+        "  └─ Alert detail → Evidence / Timeline / Remediation",
+        "Assets → Asset detail → Related alerts",
+        "Investigations → Saved investigations"
+      ],
+      "cross_links": [
+        "Alert → asset",
+        "Alert → related alerts",
+        "Alert → incident (if grouping exists)",
+        "Alert → remediation record"
+      ],
+      "search_and_filters": "Global alert search, severity/status/owner filters, asset drill-in",
+      "task_walkthroughs": {
+        "triage": "Queue → sort/filter → open alert → decide",
+        "investigate": "Open alert deep link → inspect evidence → pivot to asset or linked alerts",
+        "remediate": "Alert detail → ownership and remediation panel → status",
+        "asset": "Asset detail → related alerts → alert detail"
+      },
+      "benefits": [
+        "Strong fast triage and granular control",
+        "Preserves separate alert details and investigation pivots",
+        "Works even without reliable correlation"
+      ],
+      "failure_modes": [
+        "Can fragment a single incident into many alerts",
+        "Analyst may manually synthesize context across related signals",
+        "First-time responders may lack workflow guidance"
+      ],
+      "fit_scores": {
+        "efficiency": 4.6,
+        "information_density": 4.6,
+        "discoverability": 4.0,
+        "user_control": 4.9,
+        "guidance": 3.4,
+        "flexibility": 4.8,
+        "consistency": 4.4,
+        "simplicity": 4.1
+      },
+      "fit_rationale": "Hypothesis: a frequently used alert queue and detail object support high-volume triage and flexible pivots; guidance and correlation remain weaker.",
+      "known_hard_constraint_violations": [],
+      "unknown_constraints": [
+        "Data-level authorization for linked assets must be specified"
+      ]
+    },
+    {
+      "id": "workflow-centered",
+      "name": "Workflow / task-oriented",
+      "organizing_principle": "Users progress across explicit triage, investigation, remediation, and resolution stages",
+      "default_entry": "Triage stage / assigned work",
+      "navigation_tree": [
+        "Triage → Prioritize and assign",
+        "Investigate → Evidence and relationships",
+        "Remediate → Action plan and handoff",
+        "Resolve → Verification and closure"
+      ],
+      "cross_links": [
+        "Stage → alert",
+        "Investigation → related assets",
+        "Remediation → owner/incident"
+      ],
+      "search_and_filters": "Stage-specific queues and task search with cross-stage history",
+      "task_walkthroughs": {
+        "triage": "Triage → select candidate → investigate stage",
+        "investigate": "Direct link → determine stage → navigate investigation context",
+        "remediate": "Investigate → Remediate stage → review and assign",
+        "asset": "Asset search → choose stage-specific related alerts"
+      },
+      "benefits": [
+        "Strong explicit next-step guidance",
+        "Clear operational responsibilities and handoffs",
+        "May help unfamiliar analysts follow a standard process"
+      ],
+      "failure_modes": [
+        "Rigid stages hinder non-linear expert investigations",
+        "Same alert may appear in several stage contexts",
+        "Deep links may create ambiguous landing states"
+      ],
+      "fit_scores": {
+        "efficiency": 3.8,
+        "information_density": 3.4,
+        "discoverability": 4.3,
+        "user_control": 3.1,
+        "guidance": 5.0,
+        "flexibility": 3.0,
+        "consistency": 4.0,
+        "simplicity": 3.7
+      },
+      "fit_rationale": "Hypothesis: stage grouping teaches process but adds navigation for analysts who need to pivot unpredictably.",
+      "known_hard_constraint_violations": [],
+      "unknown_constraints": [
+        "Workflow stage boundaries and escalation rules need validation"
+      ]
+    },
+    {
+      "id": "resource-centered",
+      "name": "Resource / asset-oriented",
+      "organizing_principle": "Servers, cloud services and applications are the top-level information objects",
+      "default_entry": "Assets / service inventory",
+      "navigation_tree": [
+        "Assets",
+        "  ├─ Service / application",
+        "  │   ├─ Health and configuration",
+        "  │   └─ Alerts and incidents",
+        "  └─ Infrastructure resource",
+        "Owners / teams"
+      ],
+      "cross_links": [
+        "Asset → active alerts",
+        "Asset → related services",
+        "Asset → owners"
+      ],
+      "search_and_filters": "Service ownership, environment and resource property filters",
+      "task_walkthroughs": {
+        "triage": "Assets → locate problem resource → alerts",
+        "investigate": "Deep-linked alert → identify asset → resource timeline",
+        "remediate": "Resource → locate alert → owner and action",
+        "asset": "Asset → related alerts"
+      },
+      "benefits": [
+        "Natural for platform owners starting from a known service",
+        "Persistent system and ownership context",
+        "Supports resource-centric troubleshooting"
+      ],
+      "failure_modes": [
+        "Scattered severity prioritization across assets",
+        "Organization-wide alert queue harder to access",
+        "Cross-resource incident may be fragmented"
+      ],
+      "fit_scores": {
+        "efficiency": 3.1,
+        "information_density": 4.3,
+        "discoverability": 3.2,
+        "user_control": 4.5,
+        "guidance": 2.9,
+        "flexibility": 3.8,
+        "consistency": 4.0,
+        "simplicity": 3.3
+      },
+      "fit_rationale": "Hypothesis: effective for asset-centered users, worse when triage starts from an organization-wide alert priority.",
+      "known_hard_constraint_violations": [],
+      "unknown_constraints": [
+        "Resource inventory coverage and owner mappings unknown"
+      ]
+    },
+    {
+      "id": "incident-centered",
+      "name": "Incident / correlation-oriented",
+      "organizing_principle": "Group related security signals into an incident-level investigation entity",
+      "default_entry": "Active incidents / correlated signal groups",
+      "navigation_tree": [
+        "Incidents",
+        "  ├─ Active incidents",
+        "  ├─ Investigations",
+        "  └─ Incident detail → Signals / Assets / Timeline / Response",
+        "Unassigned signals → Raw alerts"
+      ],
+      "cross_links": [
+        "Incident → alerts",
+        "Incident → impacted assets",
+        "Incident → remediation and owners"
+      ],
+      "search_and_filters": "Incident status, severity, related alerts, blast radius and owner filters",
+      "task_walkthroughs": {
+        "triage": "Incident queue → open correlated group → decide",
+        "investigate": "Alert deep link → incident → signals, evidence and assets",
+        "remediate": "Incident → response owner → remediation",
+        "asset": "Asset → linked incidents → underlying alerts"
+      },
+      "benefits": [
+        "Groups noise into actionable cases when correlation is reliable",
+        "Presents related evidence and responders together",
+        "Supports multi-alert investigations"
+      ],
+      "failure_modes": [
+        "Incorrect correlation obscures critical standalone alerts",
+        "Users may distrust grouping and need raw-alert escape",
+        "Dependent on correlation quality and editorial rules"
+      ],
+      "fit_scores": {
+        "efficiency": 4.2,
+        "information_density": 4.5,
+        "discoverability": 3.8,
+        "user_control": 3.7,
+        "guidance": 4.4,
+        "flexibility": 4.0,
+        "consistency": 3.9,
+        "simplicity": 3.9
+      },
+      "fit_rationale": "Hypothesis: strong when signals reliably group; limited without validated correlation and an accessible raw-alert view.",
+      "known_hard_constraint_violations": [],
+      "unknown_constraints": [
+        "No evidence of signal correlation accuracy; must not suppress independent critical alerts"
+      ]
+    }
+  ],
+  "provisional_recommendation": {
+    "primary_architecture": "alert-centered",
+    "overlay": "Workflow cues for next actions, resource-based filtering/cross-links, contextual AI assistance (not a top-level IA destination)",
+    "reason": "High task weights on control, efficiency and information density provisionally favor an alert-level canonical object with flexible pivots. This is a hypothesis, not proof.",
+    "conditions_for_reversal": [
+      "If reliable correlation demonstrably improves task success, test incident-first IA",
+      "If dominant jobs begin from a known asset, resource-first may win",
+      "If novice guided response is the priority, workflow-first may win"
+    ],
+    "who_may_lose": [
+      "Novice analysts who need process guidance",
+      "Incident responders dealing with many related alerts"
+    ]
+  },
+  "known_evidence_gaps": [
+    "No observed security analyst mental models or tree-test results",
+    "No directly measured time-to-triage, findability or remediation success",
+    "Option fit estimates assigned for demonstration, not user or stakeholder validated",
+    "No validated incident correlation accuracy"
+  ],
+  "validation": {
+    "before_wireframes": [
+      "Task analysis across analyst and platform-owner roles",
+      "Tree test the four candidate navigation structures with representative tasks",
+      "Low-fidelity workflow walkthrough of deep-link, filtering, evidence pivot and remediation",
+      "Audit every architecture for security permissions and critical-alert visibility"
+    ],
+    "metrics": [
+      "Findability and first-click success",
+      "Wrong turns and backtracks",
+      "Task success on triage and investigation",
+      "Unnecessary context switches",
+      "Recovery from missing or mis-grouped evidence"
+    ],
+    "invalidation": "If incident-first or workflow-first consistently outperforms alert-first on priority tasks without harming critical alert access, revise the preferred IA."
+  }
+}

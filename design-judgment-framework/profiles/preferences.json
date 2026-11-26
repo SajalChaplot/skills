@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "axes": {
+    "efficiency": {
+      "label": "Workflow efficiency",
+      "description": "Short task paths, minimal context switching and time to completion."
+    },
+    "learnability": {
+      "label": "Learnability and guidance",
+      "description": "How quickly unfamiliar users can understand and complete the workflow."
+    },
+    "discoverability": {
+      "label": "Feature discoverability",
+      "description": "Can users find capabilities and essential next steps?"
+    },
+    "flexibility": {
+      "label": "Flexibility and control",
+      "description": "Advanced configuration, customization, expert control."
+    },
+    "transparency": {
+      "label": "System visibility",
+      "description": "Status, diagnostics, consequences, and decision legibility."
+    },
+    "consistency": {
+      "label": "Consistency",
+      "description": "Reuse familiar conventions and coherent patterns."
+    },
+    "recoverability": {
+      "label": "Recoverability",
+      "description": "Prevent catastrophic failure, support undo and restore progress."
+    },
+    "collaboration": {
+      "label": "Collaboration",
+      "description": "Shared context, handoff, ownership, and coordinating work."
+    }
+  },
+  "organization": {
+    "id": "sample-developer-org",
+    "name": "Example developer-product organization",
+    "domain": "developer",
+    "priority_weights": {
+      "efficiency": 75,
+      "learnability": 65,
+      "discoverability": 60,
+      "flexibility": 80,
+      "transparency": 80,
+      "consistency": 55,
+      "recoverability": 85,
+      "collaboration": 55
+    },
+    "autonomy_initiative": 40,
+    "hard_constraints": [
+      "Applicable accessibility requirements",
+      "Applicable privacy and data protection requirements",
+      "Security and authorization boundaries",
+      "Applicable legal and compliance obligations"
+    ],
+    "notes": "Example weights are framework-authored starting points, not empirical evidence or vendor defaults."
+  },
+  "tasks": [
+    {
+      "id": "project-setup",
+      "name": "Connect an existing app",
+      "priority_weight_overrides": {
+        "efficiency": 90,
+        "learnability": 85,
+        "discoverability": 70,
+        "transparency": 65
+      },
+      "autonomy_initiative_override": 30,
+      "notes": "Example: learning and first-use completion matter more in setup than in a daily expert operation."
+    }
+  ]
+}

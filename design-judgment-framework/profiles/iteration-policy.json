@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.2",
+  "profile_name": "Balanced exploration",
+  "description": "Editable organization default. Override this file or supply an optional project policy to the feedback controller.",
+  "revision_limits": {
+    "per_decision": 3,
+    "total_per_project": 8,
+    "per_stage": 3
+  },
+  "execution_budget": {
+    "max_elapsed_minutes": 30,
+    "max_reported_tool_calls": 60
+  },
+  "convergence": {
+    "min_meaningful_rubric_delta": 5,
+    "max_stagnant_cycles": 2,
+    "require_novel_evidence_or_change": true
+  },
+  "reentry": {
+    "allowed_triggers": [
+      "new_evidence",
+      "contradiction",
+      "failed_validation",
+      "constraint_change",
+      "material_weakness"
+    ],
+    "rerun_affected_downstream": true,
+    "require_invalidation_targets": true,
+    "allow_explicit_human_reopen": true
+  },
+  "exhaustion": {
+    "material_risk": "escalate",
+    "unresolved_mandatory_constraints": "escalate",
+    "otherwise": "stop_provisional"
+  }
+}

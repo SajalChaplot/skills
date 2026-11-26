@@ -1,0 +1,5 @@
+{
+  "revision_limits": {"per_decision": 2},
+  "execution_budget": {"max_elapsed_minutes": 20},
+  "convergence": {"max_stagnant_cycles": 1}
+}

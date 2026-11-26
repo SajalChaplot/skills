@@ -1,0 +1,63 @@
+{
+  "case_id": "security-alert-ia-exploration",
+  "evaluation_status": "illustrative_ia_fit_estimates_not_user_evidence",
+  "profile_origin": "User-supplied task priority overrides from prior security-alert concept review; not research defaults",
+  "weights_used": {
+    "efficiency": 90.0,
+    "information_density": 80.0,
+    "discoverability": 55.0,
+    "user_control": 95.0,
+    "guidance": 70.0,
+    "flexibility": 70.0,
+    "consistency": 85.0,
+    "simplicity": 80.0
+  },
+  "ranked_options": [
+    {
+      "id": "alert-centered",
+      "name": "Alert-centered / object-oriented",
+      "score": 87.79,
+      "unknown_constraints": [
+        "Data-level authorization for linked assets must be specified"
+      ]
+    },
+    {
+      "id": "incident-centered",
+      "name": "Incident / correlation-oriented",
+      "score": 80.96,
+      "unknown_constraints": [
+        "No evidence of signal correlation accuracy; must not suppress independent critical alerts"
+      ]
+    },
+    {
+      "id": "workflow-centered",
+      "name": "Workflow / task-oriented",
+      "score": 74.91,
+      "unknown_constraints": [
+        "Workflow stage boundaries and escalation rules need validation"
+      ]
+    },
+    {
+      "id": "resource-centered",
+      "name": "Resource / asset-oriented",
+      "score": 73.58,
+      "unknown_constraints": [
+        "Resource inventory coverage and owner mappings unknown"
+      ]
+    }
+  ],
+  "disqualified_options": [],
+  "preference_leader": "alert-centered",
+  "top_two_gap_points": 6.83,
+  "near_tie": false,
+  "winner_sensitive_to_weight_changes": false,
+  "sensitivity_winner_changes": [],
+  "evidence_gaps": [
+    "No observed security analyst mental models or tree-test results",
+    "No directly measured time-to-triage, findability or remediation success",
+    "Option fit estimates assigned for demonstration, not user or stakeholder validated",
+    "No validated incident correlation accuracy"
+  ],
+  "requires_independent_ia_validation": true,
+  "decision_policy": "IA ranking is provisional; governance and user research remain separate. No external implementation authorized."
+}

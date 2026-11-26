@@ -1,0 +1,58 @@
+{
+  "domain": "developer",
+  "reviewed_on": "2026-11-24",
+  "cases": [
+    {
+      "id": "stripe-payment-api-evolution",
+      "organization": "Stripe",
+      "source_url": "https://stripe.com/blog/payment-api-design",
+      "evidence_type": "documented_decision",
+      "user_job": "Integrate payments while supporting multiple payment methods",
+      "tension": "Simpler card integrations versus extensible, asynchronous payment API",
+      "documented_choice": "Evolution toward PaymentIntents and later guidance that clarified integration paths and trade-offs",
+      "alternatives": "Earlier Charges API and distinct integration choices are discussed in retrospective",
+      "outcome": "Specific quantified usability improvement not established by this source",
+      "transfer_rule": "When offering a simple path, disclose significant limitations and preserve migration to richer workflows",
+      "transfer_limits": "API architecture is not identical to a UI setup wizard"
+    },
+    {
+      "id": "gitlab-principles",
+      "organization": "GitLab",
+      "source_url": "https://design.gitlab.com/about/principles/",
+      "evidence_type": "published_principle",
+      "user_job": "Daily development workflows with advanced capabilities",
+      "tension": "Sophisticated functionality versus straightforward common work",
+      "documented_choice": "Public design principles favor immediately useful simple experiences with advanced features discoverable",
+      "alternatives": "Not a specific documented A/B decision",
+      "outcome": "No specific measured outcome in this source",
+      "transfer_rule": "For frequent jobs, make essentials easy and advanced tasks discoverable",
+      "transfer_limits": "A principle alone does not prove effectiveness for another product"
+    },
+    {
+      "id": "vscode-philosophy",
+      "organization": "Microsoft VS Code",
+      "source_url": "https://github.com/microsoft/vscode/blob/main/.github/skills/design-philosophy/SKILL.md",
+      "evidence_type": "published_principle",
+      "user_job": "Remain focused on coding or editing tasks",
+      "tension": "Visible affordances versus calm primary work surface",
+      "documented_choice": "Design philosophy distinguishes values, evaluative principles and specific UI moves",
+      "alternatives": "Not a controlled comparison",
+      "outcome": "No measured outcome in the cited skill",
+      "transfer_rule": "Secondary chrome should not unnecessarily dominate primary work",
+      "transfer_limits": "Specific to an editor environment; diagnostics may need prominence"
+    },
+    {
+      "id": "github-primer-guidance",
+      "organization": "GitHub",
+      "source_url": "https://primer.github.io/design/guides/introduction/",
+      "evidence_type": "published_principle",
+      "user_job": "Use cohesive accessible developer interfaces",
+      "tension": "Efficiency and feature richness versus consistency and access",
+      "documented_choice": "Primer describes cohesive, accessible, responsive, efficient design language",
+      "alternatives": "No particular alternative documented",
+      "outcome": "No measured outcome in the cited guide",
+      "transfer_rule": "Prefer platform-consistent patterns unless clear user evidence justifies deviation",
+      "transfer_limits": "Product-level precedent is not causal evidence"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.2",
+  "project_id": "replace-with-project-id",
+  "title": "Replace with project name",
+  "domain": "Specify relevant domain",
+  "version": 1,
+  "project_status": "in_review",
+  "workflow_history_section_id": "agent-chosen-iteration-history-id",
+  "sections": []
+}

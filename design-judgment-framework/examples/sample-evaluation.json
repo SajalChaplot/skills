@@ -1,0 +1,53 @@
+{
+  "case_id": "example-project-setup",
+  "task_id": "project-setup",
+  "evaluation_status": "illustrative_estimates_not_outcome_evidence",
+  "weights_used": {
+    "efficiency": 90.0,
+    "learnability": 85.0,
+    "discoverability": 70.0,
+    "flexibility": 80.0,
+    "transparency": 65.0,
+    "consistency": 55.0,
+    "recoverability": 85.0,
+    "collaboration": 55.0
+  },
+  "autonomy_initiative_used": 30.0,
+  "task_override_active": true,
+  "ranked_options": [
+    {
+      "id": "progressive",
+      "name": "Progressive configuration",
+      "score": 84.1
+    },
+    {
+      "id": "guided",
+      "name": "Auto-detect and guided setup",
+      "score": 76.75
+    },
+    {
+      "id": "all-upfront",
+      "name": "All settings upfront",
+      "score": 68.72
+    }
+  ],
+  "disqualified_options": [],
+  "preferred_option": "progressive",
+  "top_two_gap_points": 7.35,
+  "near_tie": false,
+  "sensitivity_winner_changes": [],
+  "ranking_sensitive": false,
+  "assessment": {
+    "evidence_confidence": 0.46,
+    "risk": 0.26,
+    "reversible": true,
+    "action_requires_approval": false,
+    "hard_constraint_violations": [],
+    "unknown_constraints": [],
+    "confidence_rationale": "The design is consistent with published principles, but no direct task study or analytics are provided",
+    "risk_rationale": "A design draft/prototype is reversible, but a poor setup experience could block task success. Production rollout would need its own risk review."
+  },
+  "gate": "prototype_and_validate",
+  "gate_reason": "Low-risk reversible hypothesis, but further evidence is needed before commitment.",
+  "disclaimer": "Preference scores are estimated fit ratings, not measured outcomes, evidence confidence, or authorization to act."
+}

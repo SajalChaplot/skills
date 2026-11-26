@@ -1,0 +1,797 @@
+{
+  "schema_version": "1.2",
+  "project_id": "security-alert-triage-concept",
+  "title": "Security Alert Triage",
+  "domain": "Security operations",
+  "project_status": "provisional",
+  "owner": "Product design team",
+  "version": 1,
+  "summary": "Illustrative case used to exercise IA exploration, interface concepts, agent feedback loops and human verification. Not an observed user study.",
+  "sections": [
+    {
+      "id": "mandate",
+      "title": "Mandate & user jobs",
+      "group": "01 · Understand",
+      "description": "Define what the analyst is doing, why it matters and what cannot be compromised.",
+      "artifacts": [
+        {
+          "id": "problem-context",
+          "title": "Problem brief",
+          "summary": "Analysts must notice urgent signals, investigate context, and decide what to do next without losing control.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "text",
+              "text": "Decision question: For an analyst reviewing incoming security alerts, should the default workspace be alert-centered, workflow-centered or resource-centered to support prioritization and investigation?"
+            },
+            {
+              "type": "table",
+              "title": "Representative users",
+              "columns": [
+                "Role / situation",
+                "Primary job",
+                "Potential conflict"
+              ],
+              "rows": [
+                [
+                  "Triage analyst",
+                  "Identify and prioritize actionable alerts",
+                  "Speed versus sufficient evidence"
+                ],
+                [
+                  "Incident responder",
+                  "Investigate and correlate signals",
+                  "Non-linear movement between entities"
+                ],
+                [
+                  "Security lead",
+                  "Assess the state of investigations",
+                  "Summary versus detail"
+                ]
+              ]
+            },
+            {
+              "type": "callout",
+              "heading": "Evidence boundary",
+              "text": "Persona priorities and outcomes in this demonstration are hypotheses. Confirm with field research and task data; do not infer them from competitor screens.",
+              "tone": "warning"
+            }
+          ],
+          "source_type": "synthetic_example",
+          "origin_stage": "context"
+        },
+        {
+          "id": "success",
+          "title": "Measures and non-negotiables",
+          "summary": "Define measurable behavior and guardrails before comparing IA and screens.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "bullets",
+              "items": [
+                "Time to reach an appropriate first triage action (measure in tests; no baseline assumed)",
+                "Correct identification of affected asset and risk level",
+                "Ability to reconstruct why an alert was dismissed, escalated or resolved",
+                "Permission-sensitive information remains protected",
+                "Keyboard and screen-reader access to critical tasks"
+              ],
+              "title": "Candidate evaluation criteria"
+            },
+            {
+              "type": "callout",
+              "heading": "Mandatory versus adjustable",
+              "text": "Security controls, authorization and accessibility are pass/fail constraints. Preference sliders may alter emphasis between speed, density and guidance, but cannot waive these requirements.",
+              "tone": ""
+            }
+          ],
+          "origin_stage": "context"
+        }
+      ]
+    },
+    {
+      "id": "evidence-ledger",
+      "title": "Evidence & uncertainty",
+      "group": "01 · Understand",
+      "description": "Separate known inputs, provisional assumptions, reference principles and critical unanswered questions.",
+      "artifacts": [
+        {
+          "id": "evidence",
+          "title": "What we know and do not know",
+          "summary": "Sources are about design method; this case has no direct participant evidence.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "table",
+              "title": "Evidence ledger",
+              "columns": [
+                "Claim",
+                "Evidence classification",
+                "Confidence / action"
+              ],
+              "rows": [
+                [
+                  "Analysts need to pivot between alerts and assets",
+                  "Unvalidated hypothesis",
+                  "Low — walkthrough with target analysts"
+                ],
+                [
+                  "Different people may start from different objects",
+                  "Inferred from workflow diversity",
+                  "Low — contextual interviews"
+                ],
+                [
+                  "Showing all fields can increase cognitive demand",
+                  "General design heuristic",
+                  "Context-dependent; test density"
+                ],
+                [
+                  "Case study prioritization weights are explicit",
+                  "User-supplied scenario preferences",
+                  "Known configuration; not a user outcome"
+                ]
+              ]
+            },
+            {
+              "type": "sources",
+              "title": "Method references (not proof of this IA)",
+              "items": [
+                {
+                  "title": "GitLab design principles",
+                  "url": "https://design.gitlab.com/about/principles/",
+                  "note": "Example of principle-based product evaluation"
+                },
+                {
+                  "title": "Nielsen Norman Group — Tree testing",
+                  "url": "https://www.nngroup.com/articles/tree-testing/",
+                  "note": "Method for validating information findability"
+                }
+              ]
+            },
+            {
+              "type": "callout",
+              "heading": "Anti-hallucination check",
+              "text": "Do not report hypothetical task times, participant counts, detection rates or validated preferences.",
+              "tone": "warning"
+            }
+          ],
+          "source_type": "public_method_reference",
+          "origin_stage": "domain_evidence"
+        }
+      ]
+    },
+    {
+      "id": "object-model",
+      "title": "Information objects",
+      "group": "02 · Structure",
+      "description": "Model the entities and cross-object relationships before choosing a navigation hierarchy.",
+      "artifacts": [
+        {
+          "id": "entities",
+          "title": "Entity and transition model",
+          "summary": "Alerts and investigations need stable identifiers and cross-links; the data model need not be the navigation model.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "table",
+              "title": "Entity model",
+              "columns": [
+                "Object",
+                "Key relationships",
+                "Typical action"
+              ],
+              "rows": [
+                [
+                  "Alert",
+                  "May reference one or more assets; may belong to an investigation",
+                  "Investigate, dismiss, escalate"
+                ],
+                [
+                  "Asset",
+                  "May have multiple alerts and investigations",
+                  "Inspect context, pivot to alert"
+                ],
+                [
+                  "Investigation",
+                  "Groups relevant alerts, users, evidence and actions",
+                  "Track hypothesis and resolution"
+                ],
+                [
+                  "Action / audit event",
+                  "Attached to alert or investigation",
+                  "Explain what happened and who acted"
+                ]
+              ]
+            },
+            {
+              "type": "steps",
+              "title": "Example non-linear path",
+              "steps": [
+                "Alert queue",
+                "Open alert",
+                "Inspect asset",
+                "Return to investigation",
+                "Take action"
+              ]
+            },
+            {
+              "type": "callout",
+              "heading": "Critical IA distinction",
+              "text": "The backend relation graph does not automatically establish the best navigation. Navigation should be tested against realistic starting points and tasks.",
+              "tone": ""
+            }
+          ],
+          "origin_stage": "information_architecture"
+        }
+      ]
+    },
+    {
+      "id": "ia-candidates",
+      "title": "Navigation explorations",
+      "group": "02 · Structure",
+      "description": "Structural alternatives, consistent task traces, known weaknesses and provisional reasoning.",
+      "artifacts": [
+        {
+          "id": "ia-map",
+          "title": "Four organization models",
+          "summary": "Each model represents a different default entry point, not simply a different visual layout.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "ia",
+              "title": "Alternative IA trees — hypothetical",
+              "variants": [
+                {
+                  "title": "A · Alert-centered",
+                  "summary": "Queue is home; asset and incident pivots in details",
+                  "nodes": [
+                    {
+                      "label": "Alert queue",
+                      "depth": 0
+                    },
+                    {
+                      "label": "Priority / status filters",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Alert details",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Linked assets",
+                      "depth": 2
+                    },
+                    {
+                      "label": "Investigation record",
+                      "depth": 2
+                    }
+                  ]
+                },
+                {
+                  "title": "B · Workflow-centered",
+                  "summary": "Steps guide analyst through triage and resolution",
+                  "nodes": [
+                    {
+                      "label": "Triage workspace",
+                      "depth": 0
+                    },
+                    {
+                      "label": "Review",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Investigate",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Remediate",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Resolve",
+                      "depth": 1
+                    }
+                  ]
+                },
+                {
+                  "title": "C · Resource-centered",
+                  "summary": "Enter by asset and review its active signals",
+                  "nodes": [
+                    {
+                      "label": "Assets",
+                      "depth": 0
+                    },
+                    {
+                      "label": "Asset detail",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Active alerts",
+                      "depth": 2
+                    },
+                    {
+                      "label": "Related investigations",
+                      "depth": 2
+                    }
+                  ]
+                },
+                {
+                  "title": "D · Incident-centered",
+                  "summary": "Group signals into investigations first",
+                  "nodes": [
+                    {
+                      "label": "Investigations",
+                      "depth": 0
+                    },
+                    {
+                      "label": "Active incidents",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Related alerts",
+                      "depth": 2
+                    },
+                    {
+                      "label": "Evidence & actions",
+                      "depth": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "table",
+              "title": "Same task, different route",
+              "columns": [
+                "Approach",
+                "Starting point",
+                "Likely strength",
+                "Watch-out"
+              ],
+              "rows": [
+                [
+                  "Alert-centered",
+                  "Alert queue",
+                  "Prioritizes incoming signal work",
+                  "May fragment investigation context"
+                ],
+                [
+                  "Workflow-centered",
+                  "Triage stages",
+                  "Step-by-step guidance",
+                  "Can constrain non-linear expert pivots"
+                ],
+                [
+                  "Resource-centered",
+                  "Asset inventory",
+                  "Supports system-level reasoning",
+                  "Cross-asset urgency can be hidden"
+                ],
+                [
+                  "Incident-centered",
+                  "Investigation list",
+                  "Reduces signal fragmentation",
+                  "Relies on trustworthy grouping"
+                ]
+              ]
+            },
+            {
+              "type": "callout",
+              "heading": "Provisional IA selection",
+              "text": "Prefer an alert-centered entry for queue-driven triage, with direct asset and investigation pivots. This is a testable hypothesis, not a demonstrated universal choice.",
+              "tone": ""
+            }
+          ],
+          "decision_id": "security-alert-navigation",
+          "origin_stage": "information_architecture"
+        },
+        {
+          "id": "ia-criteria",
+          "title": "Compare structural trade-offs",
+          "summary": "Use a separate case-specific IA rubric; do not silently sync it with global eight UI dimensions.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "table",
+              "title": "Scenario preference examples",
+              "columns": [
+                "IA consideration",
+                "Illustrative priority (0–100)",
+                "Reason to investigate"
+              ],
+              "rows": [
+                [
+                  "Workflow efficiency",
+                  "90",
+                  "Frequent queue processing"
+                ],
+                [
+                  "Information density",
+                  "80",
+                  "High-volume signal work"
+                ],
+                [
+                  "Discoverability",
+                  "55",
+                  "New features should remain findable"
+                ],
+                [
+                  "User control",
+                  "95",
+                  "Non-linear investigation needs"
+                ],
+                [
+                  "Guidance",
+                  "70",
+                  "Supports unfamiliar situations"
+                ],
+                [
+                  "Consistency",
+                  "85",
+                  "Predictable cross-object paths"
+                ]
+              ]
+            },
+            {
+              "type": "callout",
+              "heading": "Validation trigger",
+              "text": "If a resource-first investigation cannot be completed without repeated context loss, reopen this IA decision before spending effort refining a wireframe.",
+              "tone": "warning"
+            }
+          ],
+          "origin_stage": "information_architecture"
+        }
+      ]
+    },
+    {
+      "id": "concept-studies",
+      "title": "Triage interface concepts",
+      "group": "03 · Explore",
+      "description": "Compare genuinely different interaction approaches, all consistent with explicitly defined IA assumptions.",
+      "artifacts": [
+        {
+          "id": "three-concepts",
+          "title": "Three directions to evaluate",
+          "summary": "Low-fidelity representations expose hierarchy and action placement, not final visual polish.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "wireframes",
+              "title": "Illustrative wireframe concepts",
+              "screens": [
+                {
+                  "name": "Concept 1 · Queue first",
+                  "app": "Sentinel / Alerts",
+                  "heading": "Priority alerts",
+                  "nav": [
+                    "Overview",
+                    "Alerts",
+                    "Investigations",
+                    "Assets"
+                  ],
+                  "selected_nav": 1,
+                  "controls": "Search alerts  ·  Severity  ·  Status",
+                  "cards": [
+                    {
+                      "title": "Critical · Suspicious login",
+                      "detail": "Service A · 3m ago"
+                    },
+                    {
+                      "title": "High · Unusual access",
+                      "detail": "Service B · 12m ago"
+                    },
+                    {
+                      "title": "Medium · Configuration drift",
+                      "detail": "Service C · 28m ago"
+                    }
+                  ],
+                  "action": "Investigate alert",
+                  "rationale": "Optimizes a triage-heavy starting point; requires strong cross-object pivots."
+                },
+                {
+                  "name": "Concept 2 · Investigation flow",
+                  "app": "Sentinel / Workbench",
+                  "heading": "Investigate suspicious activity",
+                  "nav": [
+                    "Intake",
+                    "Review",
+                    "Analyze",
+                    "Resolve"
+                  ],
+                  "selected_nav": 1,
+                  "controls": "Step 2 of 4 · Analyze",
+                  "cards": [
+                    {
+                      "title": "Alert summary",
+                      "detail": "Why it was flagged"
+                    },
+                    {
+                      "title": "Related evidence",
+                      "detail": "Assets, users, related signals"
+                    },
+                    {
+                      "title": "Suggested next action",
+                      "detail": "Must remain user-controlled"
+                    }
+                  ],
+                  "action": "Continue investigation",
+                  "rationale": "Offers strong guidance but risks procedural rigidity during expert investigation."
+                },
+                {
+                  "name": "Concept 3 · Asset lens",
+                  "app": "Sentinel / Assets",
+                  "heading": "Affected infrastructure",
+                  "nav": [
+                    "Assets",
+                    "Services",
+                    "Investigations",
+                    "Alerts"
+                  ],
+                  "selected_nav": 0,
+                  "controls": "Filter assets · Risk",
+                  "cards": [
+                    {
+                      "title": "Payments API",
+                      "detail": "4 active alerts"
+                    },
+                    {
+                      "title": "Identity service",
+                      "detail": "2 active alerts"
+                    },
+                    {
+                      "title": "Edge cluster",
+                      "detail": "1 active alert"
+                    }
+                  ],
+                  "action": "Open asset",
+                  "rationale": "Makes resource context primary but may bury the most urgent cross-system alert."
+                }
+              ]
+            },
+            {
+              "type": "callout",
+              "heading": "Review question",
+              "text": "Can each concept support urgent triage, asset pivot, evidence inspection and action auditing without violating permissions?",
+              "tone": ""
+            }
+          ],
+          "decision_id": "security-alert-navigation",
+          "origin_stage": "options"
+        }
+      ]
+    },
+    {
+      "id": "selected-direction",
+      "title": "Recommended concept",
+      "group": "03 · Explore",
+      "description": "A conditional recommendation with explicit sacrifices, evaluation assumptions and a path to reversal.",
+      "artifacts": [
+        {
+          "id": "recommendation",
+          "title": "Queue-first with direct contextual pivots",
+          "summary": "The recommended concept is provisional until tested against real analyst tasks.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "conditional_recommendation",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "wireframes",
+              "screens": [
+                {
+                  "name": "Proposed · Queue + contextual investigation",
+                  "app": "Sentinel / Alerts",
+                  "heading": "Investigate alert #A-104",
+                  "nav": [
+                    "Alerts",
+                    "Investigations",
+                    "Assets",
+                    "Activity"
+                  ],
+                  "selected_nav": 0,
+                  "controls": "Severity · Status · Saved views",
+                  "cards": [
+                    {
+                      "title": "Alert summary + rationale",
+                      "detail": "Why it matters · source and timestamp"
+                    },
+                    {
+                      "title": "Linked asset + active investigation",
+                      "detail": "Switch context without losing alert"
+                    },
+                    {
+                      "title": "Evidence and safe actions",
+                      "detail": "Review / Escalate / Dismiss with audit trail"
+                    }
+                  ],
+                  "action": "Escalate with rationale",
+                  "rationale": "Retains queue efficiency while supporting reversible, auditable context pivots."
+                }
+              ]
+            },
+            {
+              "type": "table",
+              "title": "Explicit trade-offs",
+              "columns": [
+                "Gain",
+                "Cost",
+                "Mitigation"
+              ],
+              "rows": [
+                [
+                  "Fast queue entry",
+                  "Less obvious resource-wide view",
+                  "Prominent asset pivot and saved views"
+                ],
+                [
+                  "Dense operational context",
+                  "Learning curve for unfamiliar users",
+                  "Progressive explanation and clear labels"
+                ],
+                [
+                  "Manual analyst control",
+                  "More interaction choices",
+                  "Use safe defaults and task-based tests"
+                ]
+              ]
+            },
+            {
+              "type": "callout",
+              "heading": "Decision threshold",
+              "text": "If real investigation tests show repeated context loss or materially worse accuracy than resource-/incident-first designs, revisit the structural decision rather than only polishing visuals.",
+              "tone": "warning"
+            }
+          ],
+          "decision_id": "security-alert-navigation",
+          "origin_stage": "decision_record"
+        }
+      ]
+    },
+    {
+      "id": "validation-plan",
+      "title": "Tests & governance",
+      "group": "04 · Validate",
+      "description": "Specify which evidence would change the recommendation, and preserve authorization boundaries.",
+      "artifacts": [
+        {
+          "id": "test-plan",
+          "title": "Proposed IA and concept tests",
+          "summary": "No tests are claimed to have been run.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "test_plan",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "table",
+              "title": "Evaluation plan",
+              "columns": [
+                "Question",
+                "Method",
+                "Disconfirming finding"
+              ],
+              "rows": [
+                [
+                  "Can analysts locate the right starting point?",
+                  "Tree test across IA alternatives",
+                  "Repeated route errors / miscategorization"
+                ],
+                [
+                  "Can they follow non-linear investigation pivots?",
+                  "Task walkthrough with realistic scenarios",
+                  "Cannot return to alert context or loses evidence"
+                ],
+                [
+                  "Are priority and next actions understood?",
+                  "Low-fidelity usability test",
+                  "Incorrect action or confusion about severity"
+                ],
+                [
+                  "Are destructive/security changes protected?",
+                  "Permission and audit review",
+                  "Unauthorized or untraceable changes"
+                ]
+              ]
+            },
+            {
+              "type": "callout",
+              "heading": "Autonomy gate",
+              "text": "The agent may propose and prototype this concept internally. Production security settings, alert dismissal automation and account permissions require explicit approval.",
+              "tone": "warning"
+            }
+          ],
+          "origin_stage": "validation"
+        }
+      ]
+    },
+    {
+      "id": "revisions",
+      "title": "Feedback & iteration",
+      "group": "04 · Validate",
+      "description": "A visible record of contradictions, backward transitions, review requests and stopping conditions.",
+      "artifacts": [
+        {
+          "id": "history",
+          "title": "Illustrative controlled feedback loop",
+          "summary": "Controller demonstration: new asset-pivot evidence invalidates IA, causing affected downstream work to be revised.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "illustrative_workflow",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "steps",
+              "title": "Selective re-entry",
+              "steps": [
+                "Options review",
+                "Contradiction found",
+                "Revisit IA",
+                "Refresh wireframes",
+                "Recheck governance",
+                "Validate"
+              ]
+            },
+            {
+              "type": "table",
+              "title": "Feedback record",
+              "columns": [
+                "Input",
+                "Value"
+              ],
+              "rows": [
+                [
+                  "Trigger",
+                  "Contradiction: non-linear asset pivot is poorly supported"
+                ],
+                [
+                  "Invalidated stage",
+                  "Information architecture"
+                ],
+                [
+                  "Affected downstream",
+                  "Options → Governance → Validation → Decision record"
+                ],
+                [
+                  "Loop budget",
+                  "3 revisions per decision; 30-minute overall limit (configurable)"
+                ],
+                [
+                  "Safeguard",
+                  "Stop provisional or escalate; never auto-approve high-risk work"
+                ]
+              ]
+            },
+            {
+              "type": "callout",
+              "heading": "What stops the loop?",
+              "text": "Exhausted time/tool/revision budget, two stagnant cycles, missing evidence, or required human approval. An estimate-score increase does not establish validated improvement.",
+              "tone": ""
+            }
+          ],
+          "origin_stage": "feedback_controller"
+        }
+      ]
+    }
+  ],
+  "workflow_history_section_id": "revisions"
+}

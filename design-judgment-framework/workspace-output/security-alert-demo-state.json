@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.2",
+  "started_at": "2026-11-26T06:19:43.089506+00:00",
+  "total_revisions": 1,
+  "reported_tool_calls": 4,
+  "decisions": {
+    "security-alert-navigation": {
+      "revisions": 1,
+      "stagnant_cycles": 0,
+      "known_evidence_ids": [
+        "walkthrough-asset-pivot-001"
+      ],
+      "change_fingerprints": [
+        "asset-pivot-decision-v2"
+      ]
+    }
+  },
+  "stage_reentries": {
+    "information_architecture": 1,
+    "options": 1,
+    "governance": 1,
+    "validation": 1,
+    "decision_record": 1
+  },
+  "events": [
+    {
+      "at": "2026-11-26T06:19:43.089551+00:00",
+      "decision_id": "security-alert-navigation",
+      "trigger": "contradiction",
+      "reason": "An analyst investigation requires pivoting by asset; the first IA evaluation missed this non-linear path.",
+      "result": "REVISIT",
+      "rerun_stages": [
+        "information_architecture",
+        "options",
+        "governance",
+        "validation",
+        "decision_record"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "section_id": "revisions",
+  "section_title": "Feedback & iteration",
+  "section_group": "04 · Validate",
+  "artifact": {
+    "id": "external-review-needed",
+    "title": "Follow-up review request",
+    "summary": "An agent-created artifact that appears under the project's chosen section, not under a predefined tab.",
+    "evidence_level": "review_request",
+    "review_status": "pending",
+    "blocks": [
+      {"type": "callout", "tone": "warning", "heading": "Evidence requested", "text": "Verify whether analysts can move between assets and alerts while retaining investigation context."}
+    ]
+  }
+}

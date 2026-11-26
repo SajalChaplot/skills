@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.2",
+  "project_id": "developer-setup-demo",
+  "title": "Developer Setup Flow",
+  "domain": "Developer tools",
+  "project_status": "in_review",
+  "owner": "Design team",
+  "version": 1,
+  "sections": [
+    {
+      "id": "setup-friction",
+      "title": "Setup friction",
+      "group": "Discover",
+      "description": "Only the sections relevant to this project are included.",
+      "artifacts": [
+        {
+          "id": "job",
+          "title": "Critical task",
+          "summary": "Start an existing project with minimal configuration.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "text",
+              "text": "An experienced engineer needs the app root, environment variables if applicable, setup commands, development commands, and optional settings. Assume existing technical evidence must be verified before making causal claims."
+            }
+          ],
+          "origin_stage": "context"
+        }
+      ]
+    },
+    {
+      "id": "config-map",
+      "title": "Configuration model",
+      "group": "Structure",
+      "description": "One structural model and the open trade-off.",
+      "artifacts": [
+        {
+          "id": "object-model",
+          "title": "Setup configuration groups",
+          "summary": "Group critical inputs without hiding required options.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "ia",
+              "variants": [
+                {
+                  "title": "Critical setup",
+                  "summary": "Short setup path with optional extensions",
+                  "nodes": [
+                    {
+                      "label": "Project setup",
+                      "depth": 0
+                    },
+                    {
+                      "label": "App root folder",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Environment variables",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Setup commands",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Development commands",
+                      "depth": 1
+                    },
+                    {
+                      "label": "Optional configurations",
+                      "depth": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "origin_stage": "information_architecture"
+        }
+      ]
+    },
+    {
+      "id": "test-hypotheses",
+      "title": "What to validate",
+      "group": "Decide",
+      "description": "Two tests that would affect the proposed architecture.",
+      "artifacts": [
+        {
+          "id": "experiments",
+          "title": "Falsifiable outcomes",
+          "summary": "The example is intentionally shorter than the security-review workspace.",
+          "version": 1,
+          "review_status": "pending",
+          "evidence_level": "hypothesis",
+          "owner": "Design agent",
+          "blocks": [
+            {
+              "type": "bullets",
+              "items": [
+                "Can users finish first setup without discovering optional config?",
+                "Can users recover when they need an advanced setting after initial setup?"
+              ]
+            }
+          ],
+          "origin_stage": "validation"
+        }
+      ]
+    }
+  ],
+  "workflow_history_section_id": "reviewed-feedback",
+  "workflow_history_section_title": "Feedback trace",
+  "workflow_history_section_group": "Decide"
+}

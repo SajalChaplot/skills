@@ -1,0 +1,177 @@
+{
+  "version": "1.2",
+  "entry_skill": "design-judgment",
+  "framework_root": "Locate the directory containing workflow.json, profiles, references, and skills",
+  "execution_semantics": "Dependency-aware, event-driven skill orchestration. Re-entry is allowed only via the configurable feedback controller. No underlying agent runtime is assumed to execute this manifest automatically.",
+  "stages": [
+    {
+      "id": "context",
+      "skill": "design-context",
+      "requires": [
+        "user_design_question"
+      ],
+      "produces": [
+        "decision_context"
+      ],
+      "depends_on": [],
+      "artifact_workspace_hook": "Publish a reviewable artifact when stage produces new or changed information; include provenance, uncertainty and version."
+    },
+    {
+      "id": "domain_evidence",
+      "skill": "design-domain-research",
+      "condition": "Run when domain knowledge missing/stale/contradictory",
+      "requires": [
+        "decision_context"
+      ],
+      "produces": [
+        "domain_evidence"
+      ],
+      "artifact_workspace_hook": "Publish a reviewable artifact when stage produces new or changed information; include provenance, uncertainty and version.",
+      "depends_on": [
+        "context"
+      ],
+      "dependency_note": "Conditional: skip when existing domain sources are sufficient; reused outputs remain attached to decision context."
+    },
+    {
+      "id": "precedents",
+      "skill": "design-precedents",
+      "requires": [
+        "decision_context",
+        "domain_evidence_if_available"
+      ],
+      "produces": [
+        "precedent_shortlist"
+      ],
+      "artifact_workspace_hook": "Publish a reviewable artifact when stage produces new or changed information; include provenance, uncertainty and version.",
+      "depends_on": [
+        "context",
+        "domain_evidence"
+      ]
+    },
+    {
+      "id": "information_architecture",
+      "skill": "design-information-architecture",
+      "condition": "Run if decisions affect entity grouping, labeling, hierarchy, navigation, search/filter access or cross-object flows; otherwise record an explicit skip_reason.",
+      "requires": [
+        "decision_context",
+        "precedent_shortlist",
+        "domain_evidence_if_available"
+      ],
+      "produces": [
+        "ia_exploration_or_explicit_skip_reason"
+      ],
+      "references": [
+        "references/IA_CONTRACT.md",
+        "references/IA_EXPLORATION_CHECKLIST.md"
+      ],
+      "artifact_workspace_hook": "Publish a reviewable artifact when stage produces new or changed information; include provenance, uncertainty and version.",
+      "depends_on": [
+        "context",
+        "precedents"
+      ],
+      "dependency_note": "Conditional: skip only with reason; revisiting IA invalidates associated screen concept and governance artifacts."
+    },
+    {
+      "id": "options",
+      "skill": "design-options",
+      "requires": [
+        "decision_context",
+        "precedent_shortlist",
+        "profiles/preferences.json",
+        "ia_exploration_or_explicit_skip_reason"
+      ],
+      "produces": [
+        "candidate_options",
+        "fit_estimates",
+        "weighted_comparison"
+      ],
+      "description": "Screen-level/interaction design alternatives consistent with a chosen or provisionally chosen IA.",
+      "artifact_workspace_hook": "Publish a reviewable artifact when stage produces new or changed information; include provenance, uncertainty and version.",
+      "depends_on": [
+        "information_architecture",
+        "precedents"
+      ]
+    },
+    {
+      "id": "governance",
+      "skill": "design-governance",
+      "requires": [
+        "candidate_options",
+        "evidence_assessment",
+        "hard_constraints",
+        "autonomy_preferences"
+      ],
+      "produces": [
+        "risk_and_confidence",
+        "approval_gate"
+      ],
+      "artifact_workspace_hook": "Publish a reviewable artifact when stage produces new or changed information; include provenance, uncertainty and version.",
+      "depends_on": [
+        "options"
+      ]
+    },
+    {
+      "id": "validation",
+      "skill": "design-validation",
+      "requires": [
+        "recommended_option",
+        "unknowns",
+        "approval_gate"
+      ],
+      "produces": [
+        "test_plan",
+        "stop_conditions",
+        "learning_plan"
+      ],
+      "artifact_workspace_hook": "Publish a reviewable artifact when stage produces new or changed information; include provenance, uncertainty and version.",
+      "depends_on": [
+        "governance"
+      ]
+    },
+    {
+      "id": "decision_record",
+      "skill": "design-judgment",
+      "requires": [
+        "all_stage_outputs"
+      ],
+      "produces": [
+        "structured_decision_record"
+      ],
+      "artifact_workspace_hook": "Publish a reviewable artifact when stage produces new or changed information; include provenance, uncertainty and version.",
+      "depends_on": [
+        "validation"
+      ],
+      "description": "Assemble the current state and iteration history, including any stale artifacts and stop/escalation status."
+    }
+  ],
+  "contracts": "references/CONTRACTS.md",
+  "default_preferences": "profiles/preferences.json",
+  "user_interface": "web/workspace-template.html (generated workspace), web/index.html (original preference studio)",
+  "evaluator": "scripts/evaluate.py",
+  "ia_explorer": "web/ia-explorer.html",
+  "ia_evaluator": "scripts/evaluate_ia.py",
+  "ia_example": "examples/security-alert-ia.json",
+  "iteration_policy": "profiles/iteration-policy.json",
+  "feedback_controller": {
+    "skill": "design-feedback-controller",
+    "script": "scripts/feedback_controller.py",
+    "invoke": "At each significant skill checkpoint, when evidence contradicts an earlier artifact, and before finalizing. Must be invoked by agent/orchestrator.",
+    "actions": [
+      "CONTINUE",
+      "REVISIT",
+      "VALIDATE",
+      "STOP",
+      "ESCALATE"
+    ],
+    "stop_semantics": "Budget exhaustion is provisional or escalated, never implicit implementation approval."
+  },
+  "workspace_publisher": {
+    "skill": "design-artifact-workspace",
+    "script": "scripts/workspace.py",
+    "project_manifest": "projects/<project-id>.json",
+    "output": "workspace-output/<project-id>.html",
+    "publish": "Create or update project-defined section artifacts after every meaningful stage output; rebuild standalone HTML before user review.",
+    "navigation": "Groups and section labels are selected by agent based on this project; HTML shell alone is fixed."
+  },
+  "review_feedback": "Exported workspace review JSON can be ingested as an event source; every reviewer comment must be triaged, not automatically accepted as user evidence."
+}
